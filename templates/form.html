@@ -1,0 +1,449 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+     <!-- Bootstrap 4 -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+ 
+     <!-- Font Awesome -->
+     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+     <!-- Moment.js -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+       <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+      <!-- Fengyuan Chen's Datepicker -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="container-fluid head">
+      <img src="{% static 'img/Varian Lite Logo.svg' %}">
+    </div>
+    <!-- Header -->
+
+    <!-- <img src="{% static 'img/bg.jpg' %}"> -->
+  <div class="container-fluid">
+   
+  <div class="container">
+    
+  <!-- <div id="accordion"> -->
+    {% for message in messages %}
+    
+    <div class="alert alert-danger">
+        <a class="close" href="#" data-dismiss="alert">×</a>
+           {{ message }}
+    </div>
+
+  {% endfor %}
+    <!-- Wifi Start -->
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            Custom Wifi SSID
+          </button>
+        </h5>
+      </div>
+    
+      <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            <!-- SSID -->
+            <div class="form-group">
+              <label for="exampleInputEmail1">SSID</label>
+              <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your ssid with anyone else.</small>
+            </div>
+
+            <!-- passwod and repassword -->
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Confirm Password</label>
+              <input type="password" class="form-control" name="confirm_password"  id="exampleInputPassword1" placeholder="Confirm Password">
+            </div>
+            <input type="submit" class="btn btn-info" name="wifi">
+          </form>
+        </div>
+      </div> 
+    </div>
+    <!-- Wifi End -->
+
+    <!-- Date and Time Start -->
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Date and Time
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            
+            <!-- <input class="form-control" type="time" name="_time"> -->
+            <div class="form-group">
+              <label for="exampleInputEmail1">Date</label>
+              <input type="date" min="2022-01-01" max="2099-12-31" class="form-control" name="_date" placeholder="Enter Date">
+            </div>
+            
+            <div class="form-group">  
+              <label for="exampleInputPassword1">Time</label>
+              <!-- <input type="text" id="timepicker-12-hr" name="timepicker-12-hr" class="form-control timepicker-12-hr"> -->
+              <input type="time" class="form-control" name="_time" placeholder="Month">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">AM/PM</label>
+              <!-- <input type="text" class="form-control" name="am_pm" placeholder="AM/PM"> -->
+              
+              <select class="form-control"  name="am_pm" id="am_pm">
+   
+                <option class="form-control"  value="AM">AM</option>
+                <option class="form-control"  value="PM">PM</option>
+             
+              </select>
+              
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Time Zone</label>
+              <input type="text" class="form-control" name="timezone" placeholder="Time Zone">
+            </div>
+            <input type="submit" class="btn btn-info" name="datetime">
+          </form>
+        </div>
+      </div>
+    </div>
+<!-- Date and Time end -->
+
+<!-- Time of use Lockout Start -->
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Time of Use Lockout
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+              <label for="exampleInputEmail1">Weekday Hour Range 1</label>
+              <input type="text" class="form-control" name="weekday1" aria-describedby="emailHelp" placeholder="Weekday Hour Range 1">
+              <!-- <small id="text" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
+            </div>
+            
+            <div class="form-group">  
+              <label for="exampleInputPassword1">Weekday Hour Range 2</label>
+              <input type="text" class="form-control" name="weekday2" placeholder="Weekday Hour Range 2">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Weekend Hour Range 1</label>
+              <input type="text" class="form-control" name="weekend1"  placeholder="Weekend Hour Range 1">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Weekend Hour Range 2</label>
+              <input type="text" class="form-control" name="weekend2" placeholder="Weekend Hour Range 1">
+            </div>
+
+            <input type="submit" class="btn btn-info" name="lockout">
+          </form>
+        </div>
+      </div>
+    </div>
+<!-- Time of use Lockout End -->
+
+<!-- Electrical Configuration Start -->
+    <div class="card">
+      <div class="card-header" id="headingFour">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            Electrical Configuration Ratings
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+        <div class="card-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            
+            <!-- <div class="form-group">
+              <label for="exampleInputEmail1">Sensed Panel Rating</label>
+              <input type="text" class="form-control" name="sensed_panel_rating" aria-describedby="emailHelp" placeholder="Sensed Panel Rating"> -->
+              <!-- <small id="text" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
+            <!-- </div> -->
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Sensed Panel Rating</label>
+              <select class="form-control"  name="sensed_panel_rating" id="sensed_panel_rating">
+                <option class="form-control"  value="50">50</option>
+                <option class="form-control"  value="100">100</option>
+                <option class="form-control"  value="200">200</option>
+                <option class="form-control"  value="400">400</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Sensor CT Rating</label>
+              <select class="form-control"  name="sensor_ct_rating" id="sensor_ct_rating">
+                <option class="form-control"  value="50">50</option>
+                <option class="form-control"  value="100">100</option>
+                <option class="form-control"  value="200">200</option>
+                <option class="form-control"  value="400">400</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="exampleInputPassword1">Circuit Breaker A</label>
+              <select class="form-control"  name="circuit_breaker_a" id="circuit_breaker_a">
+                
+                <option class="form-control"  value="15">15</option>
+                <option class="form-control"  value="20">20</option>
+                <option class="form-control"  value="30">30</option>
+                <option class="form-control"  value="40">40</option>
+                <option class="form-control"  value="50">50</option>
+                <option class="form-control"  value="60">60</option>
+                <option class="form-control"  value="70">70</option>
+                <option class="form-control"  value="80">80</option>
+                <option class="form-control"  value="90">90</option>
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Circuit Breaker B</label>
+              <select class="form-control"  name="circuit_breaker_b" id="circuit_breaker_b">
+                
+                <option class="form-control"  value="15">15</option>
+                <option class="form-control"  value="20">20</option>
+                <option class="form-control"  value="30">30</option>
+                <option class="form-control"  value="40">40</option>
+                <option class="form-control"  value="50">50</option>
+                <option class="form-control"  value="60">60</option>
+                <option class="form-control"  value="70">70</option>
+                <option class="form-control"  value="80">80</option>
+                <option class="form-control"  value="90">90</option>
+              </select>
+            </div>
+
+            
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Charger 1</label>
+                    <input type="text" class="form-control" name="c1" aria-describedby="emailHelp" placeholder="Charger 1">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Max Amp</label>
+                    <input type="text" class="form-control" name="max_amp1" aria-describedby="emailHelp" placeholder="Charger 1">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">  
+                    <label for="exampleInputPassword1">Circuit A/B</label>
+                    <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
+                    <select class="form-control"  name="c1ab" id="c1ab">
+                
+                      <option class="form-control"  value="A">A</option>
+                      <option class="form-control"  value="B">B</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Charger 2</label>
+                    <input type="text" class="form-control" name="c2" aria-describedby="emailHelp" placeholder="Charger 1">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Max Amp</label>
+                    <input type="text" class="form-control" name="max_amp2" aria-describedby="emailHelp" placeholder="Max Amp">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">  
+                    <label for="exampleInputPassword1">Circuit A/B</label>
+                    <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
+                    <select class="form-control"  name="c2ab" id="c2ab">
+                
+                      <option class="form-control"  value="A">A</option>
+                      <option class="form-control"  value="B">B</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+           
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Charger 3</label>
+                    <input type="text" class="form-control" name="c3" aria-describedby="emailHelp" placeholder="Charger 3">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Max Amp</label>
+                    <input type="text" class="form-control" name="max_amp3" aria-describedby="emailHelp" placeholder="Max Amp">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">  
+                    <label for="exampleInputPassword1">Circuit A/B</label>
+                    <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
+                    <select class="form-control"  name="c3ab" id="c3ab">
+                
+                      <option class="form-control"  value="A">A</option>
+                      <option class="form-control"  value="B">B</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+          
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Charger 4</label>
+                    <input type="text" class="form-control" name="c4" aria-describedby="emailHelp" placeholder="Charger 4">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Max Amp</label>
+                    <input type="text" class="form-control" name="max_amp4" aria-describedby="emailHelp" placeholder="Max Amp">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">  
+                    <label for="exampleInputPassword1">Circuit A/B</label>
+                    <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
+                    <select class="form-control"  name="c4ab" id="c4ab">
+                
+                      <option class="form-control"  value="A">A</option>
+                      <option class="form-control"  value="B">B</option>
+                      
+                    </select>
+                  </div>
+                </div>
+              </div>
+            
+            <input type="submit" class="btn btn-info" name="ec">
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Electrical Configuration End -->
+
+    <!-- Charger Circuit Assignment Start -->
+    <!-- <div class="card"> -->
+      <!-- <div class="card-header" id="headingFive">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            Charger Circuit Assignment
+          </button>
+        </h5>
+      </div>
+      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+        <div class="card-body">
+          <form action="" method="post">
+            {% csrf_token %} -->
+            
+            <!-- <div class="form-group">
+              <label for="exampleInputEmail1">Charger 1</label>
+              <input type="text" class="form-control" name="c1" aria-describedby="emailHelp" placeholder="Charger 1"> -->
+              <!-- <small id="text" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
+            <!-- </div> -->
+            
+            <!-- <div class="form-group">  
+              <label for="exampleInputPassword1">Circuit1 A/B</label>
+              <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Charger 2</label>
+              <input type="text" class="form-control" name="c2"  placeholder="Charger 2">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Circuit2 A/B</label>
+              <input type="text" class="form-control" name="c2ab" placeholder="Circuit2 A/B">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Charger 3</label>
+              <input type="text" class="form-control" name="c3" aria-describedby="emailHelp" placeholder="Charger 3">
+            </div>
+
+            <div class="form-group">  
+              <label for="exampleInputPassword1">Circuit3 A/B</label>
+              <input type="text" class="form-control" name="c3ab" placeholder="Circuit3 A/B">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Charger 4</label>
+              <input type="text" class="form-control" name="c4"  placeholder="Charger 4">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Circuit4 A/B</label>
+              <input type="text" class="form-control" name="c4ab" placeholder="Circuit4 A/B">
+            </div>
+
+            <input type="submit" class="btn btn-info" name="cca">
+          </form>
+        </div> -->
+      <!-- </div>
+    </div> -->
+    <!-- Charger Circuit Assignment End -->
+
+    <!-- <form action="" method="post">
+      {% csrf_token %}
+    <input type="submit" class="btn btn-info">
+    </form> -->
+    
+  </div>
+
+</div>
+
+
+</body>
+</html>

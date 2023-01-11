@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Josefin+Sans:ital,wght@0,300;1,400&display=swap');
+.container{
+    margin-top: 5%;
+    height: 100%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.head{
+    /* border: 1px solid black; */
+    padding: 20px;
+    background-color: #1d1f1d;
+}
+
+.head img{
+    width: 200px;
+}
+
+.card-header button{
+    font-family: 'Caveat', cursive;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #1d1f1d;
+    font-size: large;
+    font-weight: 700;
+}
