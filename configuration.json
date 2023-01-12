@@ -1,38 +1,7 @@
 {
-    "wifi": [
-        {
-            "model": "myapp.wifidetails",
-            "pk": 1,
-            "fields": {
-                "ssid": "admin",
-                "password": "abcd"
-            }
-        }
-    ],
-    "date_time": [
-        {
-            "model": "myapp.datetimedetails",
-            "pk": 1,
-            "fields": {
-                "_date": "2023-01-15",
-                "_time": "23:23:00",
-                "am_pm": "AM",
-                "timezone": "wewer"
-            }
-        }
-    ],
-    "lockout": [
-        {
-            "model": "myapp.lockoutdetails",
-            "pk": 1,
-            "fields": {
-                "weekday1": "12",
-                "weekday2": "12",
-                "weekend1": "11",
-                "weekend2": "14"
-            }
-        }
-    ],
+    "wifi": "",
+    "date_time": "",
+    "lockout": "",
     "Electrical Config": [
         {
             "model": "myapp.ecdetails",

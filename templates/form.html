@@ -59,7 +59,7 @@
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            Custom Wifi SSID
+            Custom Wi-fi SSID
           </button>
         </h5>
       </div>
@@ -71,7 +71,7 @@
             <!-- SSID -->
             <div class="form-group">
               <label for="exampleInputEmail1">SSID</label>
-              <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" placeholder="Enter email">
+              <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" placeholder="Enter Custom SSID">
               <small id="emailHelp" class="form-text text-muted">We'll never share your ssid with anyone else.</small>
             </div>
 
@@ -197,12 +197,6 @@
           <form action="" method="post">
             {% csrf_token %}
             
-            <!-- <div class="form-group">
-              <label for="exampleInputEmail1">Sensed Panel Rating</label>
-              <input type="text" class="form-control" name="sensed_panel_rating" aria-describedby="emailHelp" placeholder="Sensed Panel Rating"> -->
-              <!-- <small id="text" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
-            <!-- </div> -->
-
             <div class="form-group">
               <label for="exampleInputPassword1">Sensed Panel Rating</label>
               <select class="form-control"  name="sensed_panel_rating" id="sensed_panel_rating">
@@ -243,7 +237,7 @@
             <div class="form-group">
               <label for="exampleInputPassword1">Circuit Breaker B</label>
               <select class="form-control"  name="circuit_breaker_b" id="circuit_breaker_b">
-                
+                <option class="form-control"  value="0">0</option>
                 <option class="form-control"  value="15">15</option>
                 <option class="form-control"  value="20">20</option>
                 <option class="form-control"  value="30">30</option>
@@ -261,13 +255,13 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Charger 1</label>
-                    <input type="text" class="form-control" name="c1" aria-describedby="emailHelp" placeholder="Charger 1">
+                    <input type="text" class="form-control mobile" name="c1" aria-describedby="emailHelp" placeholder="Charger 1">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="text" class="form-control" name="max_amp1" aria-describedby="emailHelp" placeholder="Charger 1">
+                    <input type="text" class="form-control mobile" name="max_amp1" aria-describedby="emailHelp" placeholder="Charger 1">
                   </div>
                 </div>
                 <div class="col">
@@ -288,13 +282,13 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Charger 2</label>
-                    <input type="text" class="form-control" name="c2" aria-describedby="emailHelp" placeholder="Charger 1">
+                    <input type="text" class="form-control mobile" name="c2" aria-describedby="emailHelp" placeholder="Charger 1">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="text" class="form-control" name="max_amp2" aria-describedby="emailHelp" placeholder="Max Amp">
+                    <input type="text" class="form-control mobile" name="max_amp2" aria-describedby="emailHelp" placeholder="Max Amp">
                   </div>
                 </div>
                 <div class="col">
@@ -315,13 +309,13 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Charger 3</label>
-                    <input type="text" class="form-control" name="c3" aria-describedby="emailHelp" placeholder="Charger 3">
+                    <input type="text" class="form-control mobile" name="c3" aria-describedby="emailHelp" placeholder="Charger 3">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="text" class="form-control" name="max_amp3" aria-describedby="emailHelp" placeholder="Max Amp">
+                    <input type="text" class="form-control mobile" name="max_amp3" aria-describedby="emailHelp" placeholder="Max Amp">
                   </div>
                 </div>
                 <div class="col">
@@ -343,13 +337,13 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Charger 4</label>
-                    <input type="text" class="form-control" name="c4" aria-describedby="emailHelp" placeholder="Charger 4">
+                    <input type="text" class="form-control mobile" name="c4" aria-describedby="emailHelp" placeholder="Charger 4">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="text" class="form-control" name="max_amp4" aria-describedby="emailHelp" placeholder="Max Amp">
+                    <input type="text" class="form-control mobile" name="max_amp4" aria-describedby="emailHelp" placeholder="Max Amp">
                   </div>
                 </div>
                 <div class="col">
@@ -373,67 +367,6 @@
     </div>
     <!-- Electrical Configuration End -->
 
-    <!-- Charger Circuit Assignment Start -->
-    <!-- <div class="card"> -->
-      <!-- <div class="card-header" id="headingFive">
-        <h5 class="mb-0">
-          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-            Charger Circuit Assignment
-          </button>
-        </h5>
-      </div>
-      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-        <div class="card-body">
-          <form action="" method="post">
-            {% csrf_token %} -->
-            
-            <!-- <div class="form-group">
-              <label for="exampleInputEmail1">Charger 1</label>
-              <input type="text" class="form-control" name="c1" aria-describedby="emailHelp" placeholder="Charger 1"> -->
-              <!-- <small id="text" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
-            <!-- </div> -->
-            
-            <!-- <div class="form-group">  
-              <label for="exampleInputPassword1">Circuit1 A/B</label>
-              <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputPassword1">Charger 2</label>
-              <input type="text" class="form-control" name="c2"  placeholder="Charger 2">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputPassword1">Circuit2 A/B</label>
-              <input type="text" class="form-control" name="c2ab" placeholder="Circuit2 A/B">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputEmail1">Charger 3</label>
-              <input type="text" class="form-control" name="c3" aria-describedby="emailHelp" placeholder="Charger 3">
-            </div>
-
-            <div class="form-group">  
-              <label for="exampleInputPassword1">Circuit3 A/B</label>
-              <input type="text" class="form-control" name="c3ab" placeholder="Circuit3 A/B">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputPassword1">Charger 4</label>
-              <input type="text" class="form-control" name="c4"  placeholder="Charger 4">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputPassword1">Circuit4 A/B</label>
-              <input type="text" class="form-control" name="c4ab" placeholder="Circuit4 A/B">
-            </div>
-
-            <input type="submit" class="btn btn-info" name="cca">
-          </form>
-        </div> -->
-      <!-- </div>
-    </div> -->
-    <!-- Charger Circuit Assignment End -->
     
   </div>
 
