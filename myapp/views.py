@@ -4,27 +4,35 @@ from .forms import *
 from .models import *
 from django.core import serializers
 from django.contrib import messages
-
+import ast 
 # https://stackoverflow.com/questions/37840839/get-json-representation-of-django-model
 # 
+json_dict = {'wifi':'','date_time':'','lockout':'','Electrical Config':''}
 def index(request):
+    
     wifi_form = wifiForm(request.POST)
     datetime_form = DateTimeForm(request.POST)
     lock = LockoutForm(request.POST)
     ecform = EcForm(request.POST)
-    # ccaform = CcAssignmentForm(request.POST)
-    # val = serializers.serialize("json", lockoutDetails.objects.all())
-    # print(val)
+
     if request.method == 'POST' and 'wifi' in request.POST:
         if wifi_form.is_valid():
             _ssid = wifi_form.cleaned_data['ssid']
             _password = wifi_form.cleaned_data['password']
-            print("ssid:",_ssid)
+            # print("ssid:",_ssid)
             # wifi_form.save()
             t = WifiDetails.objects.get(id=1)
             t.ssid = _ssid  # change SSID field
             t.password = _password  # change SSID field
             t.save() # this will update only
+            val1 = serializers.serialize("json", WifiDetails.objects.all())
+            # print(val1)
+            res = ast.literal_eval(val1)
+            json_dict['wifi'] = res
+            json_object = json.dumps(json_dict, indent=4)
+            # Writing to configuration.json
+            with open("configuration.json", "w") as outfile:
+                outfile.write(json_object)
             messages.error(request,'Wifi Details Saved Succesfully')
         else:
             messages.error(request,'Password Mismatch Error')
@@ -44,8 +52,16 @@ def index(request):
                 t.am_pm = _am_pm
                 t.timezone = _tz
                 messages.error(request,'Date Time Saved Succesfully')
-
+                
                 t.save()
+                val2 = serializers.serialize("json", DateTimeDetails.objects.all())
+                res = ast.literal_eval(val2)
+                json_dict['date_time'] = res
+                json_object = json.dumps(json_dict, indent=4)
+                # Writing to configuration.json
+                with open("configuration.json", "w") as outfile:
+                    outfile.write(json_object)
+                # print(json_dict)
                 
     if request.method == 'POST' and 'lockout' in request.POST: 
         if lock.is_valid():
@@ -82,10 +98,20 @@ def index(request):
                     t.weekend2 = weekend2
 
                     t.save()
-                print("day1:",weekday1)
-                print("day2:",weekday2)
-                print("end1:",weekend1)
-                print("end2:",weekend2)
+                    val3 = serializers.serialize("json", lockoutDetails.objects.all())
+                    res = ast.literal_eval(val3)
+                    json_dict['lockout'] = res
+                    json_object = json.dumps(json_dict, indent=4)
+                    # Writing to configuration.json
+                    with open("configuration.json", "w") as outfile:
+                        outfile.write(json_object)
+                    # print(json_dict)
+
+                # print("day1:",weekday1)
+                # print("day2:",weekday2)
+                # print("end1:",weekend1)
+                # print("end2:",weekend2)
+
                 
     if request.method == 'POST' and 'ec' in request.POST: 
         if ecform.is_valid():
@@ -110,8 +136,8 @@ def index(request):
                 # print("c2:",_c2)
                 # print("c2ab:",_c2ab)
                 # ecform.save()
-                print("sensed_panel_rating:",spr)
-                print("sensor_ct_rating:",scr)
+                # print("sensed_panel_rating:",spr)
+                # print("sensor_ct_rating:",scr)
                 # print("circuit_breaker_a:",cba)
                 # print("circuit_breaker_b:",cbb)
                 t = ECDetails.objects.get(id=1)
@@ -132,6 +158,17 @@ def index(request):
                 t.max_amp4 = _cma4
                 t.c4ab = _c4ab
                 t.save()
+
+                val4 = serializers.serialize("json", ECDetails.objects.all())
+                res = ast.literal_eval(val4)
+                json_dict['Electrical Config'] = res
+                
+                # Serializing json
+                json_object = json.dumps(json_dict, indent=4)
+                
+                # Writing to configuration.json
+                with open("configuration.json", "w") as outfile:
+                    outfile.write(json_object)
              
     else:
         wifi_form = wifiForm()
