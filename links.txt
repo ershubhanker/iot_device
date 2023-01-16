@@ -1,1 +1,3 @@
 date time picker: https://simpleisbetterthancomplex.com/tutorial/2019/01/03/how-to-use-date-picker-with-django.html
+
+password conditions link: https://stackoverflow.com/questions/67482899/how-to-put-conditions-in-the-password-field

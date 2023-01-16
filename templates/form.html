@@ -8,6 +8,8 @@
 
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
      <!-- Bootstrap 4 -->
+
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -45,21 +47,22 @@
    
   <div class="container">
     
-  <!-- <div id="accordion"> -->
     {% for message in messages %}
     
-    <div class="alert alert-danger">
+    <div class="alert {{ message.tags }}">
         <a class="close" href="#" data-dismiss="alert">×</a>
-           {{ message }}
+        {{ message }}
+           
     </div>
 
   {% endfor %}
+
     <!-- Wifi Start -->
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            Custom Wi-fi SSID
+            Custom Wi-Fi SSID
           </button>
         </h5>
       </div>
@@ -72,7 +75,7 @@
             <div class="form-group">
               <label for="exampleInputEmail1">SSID</label>
               <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" placeholder="Enter Custom SSID">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your ssid with anyone else.</small>
+              <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
             </div>
 
             <!-- passwod and repassword -->
@@ -115,19 +118,6 @@
               <label for="exampleInputPassword1">Time</label>
               <!-- <input type="text" id="timepicker-12-hr" name="timepicker-12-hr" class="form-control timepicker-12-hr"> -->
               <input type="time" class="form-control" name="_time" placeholder="Month">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputPassword1">AM/PM</label>
-              <!-- <input type="text" class="form-control" name="am_pm" placeholder="AM/PM"> -->
-              
-              <select class="form-control"  name="am_pm" id="am_pm">
-   
-                <option class="form-control"  value="AM">AM</option>
-                <option class="form-control"  value="PM">PM</option>
-             
-              </select>
-              
             </div>
 
             <div class="form-group">
@@ -252,21 +242,25 @@
 
             
               <div class="row">
-                <div class="col">
+                <div class="col-4">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Charger 1</label>
+                    <label for="exampleInputEmail1">Charger ID 1</label>
                     <input type="text" class="form-control mobile" name="c1" aria-describedby="emailHelp" placeholder="Charger 1">
                   </div>
                 </div>
-                <div class="col">
+              </div>
+
+              <div class="row">
+                
+                <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="text" class="form-control mobile" name="max_amp1" aria-describedby="emailHelp" placeholder="Charger 1">
+                    <input type="text" class="form-control mobile" name="max_amp1" aria-describedby="emailHelp" placeholder="Max Amp">
                   </div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <div class="form-group">  
-                    <label for="exampleInputPassword1">Circuit A/B</label>
+                    <label for="exampleInputPassword1">Circuit Breaker</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
                     <select class="form-control"  name="c1ab" id="c1ab">
                 
@@ -279,21 +273,26 @@
               </div>
 
               <div class="row">
-                <div class="col">
+                <div class="col-4">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Charger 2</label>
-                    <input type="text" class="form-control mobile" name="c2" aria-describedby="emailHelp" placeholder="Charger 1">
+                    <label for="exampleInputEmail1">Charger ID 2</label>
+                    <input type="text" class="form-control mobile" name="c2" aria-describedby="emailHelp" placeholder="Charger 2">
                   </div>
                 </div>
-                <div class="col">
+                
+              </div>
+           
+              <div class="row">
+                
+                <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
                     <input type="text" class="form-control mobile" name="max_amp2" aria-describedby="emailHelp" placeholder="Max Amp">
                   </div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <div class="form-group">  
-                    <label for="exampleInputPassword1">Circuit A/B</label>
+                    <label for="exampleInputPassword1">Circuit Breaker</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
                     <select class="form-control"  name="c2ab" id="c2ab">
                 
@@ -304,21 +303,26 @@
                   </div>
                 </div>
               </div>
-           
+
               <div class="row">
-                <div class="col">
+                <div class="col-4">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Charger 3</label>
+                    <label for="exampleInputEmail1">Charger ID 3</label>
                     <input type="text" class="form-control mobile" name="c3" aria-describedby="emailHelp" placeholder="Charger 3">
                   </div>
                 </div>
-                <div class="col">
+                
+              </div>
+              
+              <div class="row">
+                
+                <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
                     <input type="text" class="form-control mobile" name="max_amp3" aria-describedby="emailHelp" placeholder="Max Amp">
                   </div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit A/B</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
@@ -331,22 +335,26 @@
                   </div>
                 </div>
               </div>
-          
+
+
 
               <div class="row">
-                <div class="col">
+                <div class="col-4">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Charger 4</label>
+                    <label for="exampleInputEmail1">Charger ID 4</label>
                     <input type="text" class="form-control mobile" name="c4" aria-describedby="emailHelp" placeholder="Charger 4">
                   </div>
-                </div>
-                <div class="col">
+                </div>                
+              </div>
+              
+              <div class="row">
+                <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
                     <input type="text" class="form-control mobile" name="max_amp4" aria-describedby="emailHelp" placeholder="Max Amp">
                   </div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit A/B</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
@@ -359,7 +367,8 @@
                   </div>
                 </div>
               </div>
-            
+
+
             <input type="submit" class="btn btn-info" name="ec">
           </form>
         </div>
@@ -372,6 +381,9 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
 </html>

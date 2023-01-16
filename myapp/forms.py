@@ -16,9 +16,19 @@ class wifiForm(forms.ModelForm):
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
-            raise forms.ValidationError(
-                "password and confirm_password does not match"
-            )
+            msg = "Password Mismatch Error"
+            self.add_error('password', msg)
+            # raise forms.ValidationError(
+            #     "password and confirm_password does not match"
+            # )
+        
+        min_length = 8
+        if len(password) < min_length:
+            msg = 'Password must be at least %s characters long.' % (str(min_length))
+            self.add_error('password', msg)
+            # raise forms.ValidationError(
+            #     "Password must be at least 8 character"
+            # )
 
 
 class DateTimeForm(ModelForm):

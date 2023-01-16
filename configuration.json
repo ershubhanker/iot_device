@@ -1,29 +1,15 @@
 {
-    "wifi": "",
-    "date_time": "",
-    "lockout": "",
-    "Electrical Config": [
+    "wifi": [
         {
-            "model": "myapp.ecdetails",
+            "model": "myapp.wifidetails",
             "pk": 1,
             "fields": {
-                "sensed_panel_rating": "50",
-                "sensor_ct_rating": "50",
-                "circuit_breaker_a": "15",
-                "circuit_breaker_b": "15",
-                "c1": "2e2",
-                "max_amp1": 12,
-                "c1ab": "B",
-                "c2": "sdf",
-                "max_amp2": 12,
-                "c2ab": "B",
-                "c3": "edf",
-                "max_amp3": 13,
-                "c3ab": "A",
-                "c4": "wef",
-                "max_amp4": 14,
-                "c4ab": "A"
+                "ssid": "admin",
+                "password": "123456789"
             }
         }
-    ]
+    ],
+    "date_time": "",
+    "lockout": "",
+    "Electrical Config": ""
 }

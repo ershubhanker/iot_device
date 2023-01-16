@@ -6,7 +6,18 @@ from django.core import serializers
 from django.contrib import messages
 import ast 
 # https://stackoverflow.com/questions/37840839/get-json-representation-of-django-model
-# 
+#
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
+
+
+
 json_dict = {'wifi':'','date_time':'','lockout':'','Electrical Config':''}
 def index(request):
     
@@ -30,12 +41,14 @@ def index(request):
             res = ast.literal_eval(val1)
             json_dict['wifi'] = res
             json_object = json.dumps(json_dict, indent=4)
+
             # Writing to configuration.json
             with open("configuration.json", "w") as outfile:
                 outfile.write(json_object)
-            messages.error(request,'Wifi Details Saved Succesfully')
+            messages.success(request,'Wifi Details Saved Successfully')
         else:
-            messages.error(request,'Password Mismatch Error')
+            # print(wifi_form['password'].errors)
+            messages.error(request,wifi_form['password'].errors)
             return redirect('/')
 
     if request.method == 'POST' and 'datetime' in request.POST: 
