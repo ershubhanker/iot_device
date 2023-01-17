@@ -30,17 +30,23 @@
     body {
       background-color: lightgreen;
     }
-
+    .main-body{
+        background-color: rgb(104, 160, 104);
+        height: 100%;
+    }
     .mobile,
     .mobile::placeholder{
-        font-size: 10px;
+        font-size: 12px;
         
     }
     .form-group label{
-        font-size: 15px;
+        font-size: 12px;
     }
 
-    option{
-        font-size: 10px;
+    hr{
+        background-color: black;
+        height: 5px;
     }
+
+    
   }

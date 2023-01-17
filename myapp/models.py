@@ -64,6 +64,7 @@ TIME_ZONE_CHOICES = (
      ('11.0', '(GMT +11:00) Magadan, Solomon Islands, New Caledonia'),
      ('12.0', '(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka')
 )
+
 class WifiDetails(models.Model):
     ssid = models.CharField(max_length=30, editable=True)
     password = models.CharField(max_length=30, editable=True)
@@ -74,7 +75,7 @@ class DateTimeDetails(models.Model):
     _date = models.DateField(null=True, editable=True)
     _time = models.TimeField(null=True, editable=True)
     # am_pm = models.CharField(max_length=30,choices = time_stamp,default='AM')
-    timezone = models.CharField(max_length=30)
+    timezone = models.CharField(max_length=30,choices=TIME_ZONE_CHOICES)
     
 
 

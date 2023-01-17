@@ -56,15 +56,15 @@ def index(request):
                 date_field = datetime_form.cleaned_data['_date']
                 time_field = datetime_form.cleaned_data['_time']
                 
-                _am_pm = datetime_form.cleaned_data['am_pm']
+                # _am_pm = datetime_form.cleaned_data['am_pm']
                 _tz = datetime_form.cleaned_data['timezone']
                 # datetime_form.save()
                 t = DateTimeDetails.objects.get(id=1)
                 t._date = date_field  # change SSID field
                 t._time = time_field  # change SSID field
-                t.am_pm = _am_pm
+                # t.am_pm = _am_pm
                 t.timezone = _tz
-                messages.error(request,'Date Time Saved Succesfully')
+                messages.success(request,'Date Time Saved Succesfully')
                 
                 t.save()
                 val2 = serializers.serialize("json", DateTimeDetails.objects.all())
@@ -144,33 +144,32 @@ def index(request):
                 _c4 = ecform.cleaned_data['c4']
                 _cma4 = ecform.cleaned_data['max_amp4']
                 _c4ab = ecform.cleaned_data['c4ab']
-                # print("c1:",_c1)
-                # print("c1ab:",_c1ab)
-                # print("c2:",_c2)
-                # print("c2ab:",_c2ab)
-                # ecform.save()
-                # print("sensed_panel_rating:",spr)
-                # print("sensor_ct_rating:",scr)
-                # print("circuit_breaker_a:",cba)
-                # print("circuit_breaker_b:",cbb)
-                t = ECDetails.objects.get(id=1)
-                t.sensed_panel_rating = spr
-                t.sensor_ct_rating = scr
-                t.circuit_breaker_a = cba
-                t.circuit_breaker_b = cbb
-                t.c1 = _c1
-                t.c1ab = _c1ab
-                t.max_amp1 = _cma1
-                t.c2 = _c2
-                t.c2ab = _c2ab
-                t.max_amp2 = _cma2
-                t.c3 = _c3
-                t.max_amp3 = _cma3
-                t.c3ab = _c3ab
-                t.c4 = _c4
-                t.max_amp4 = _cma4
-                t.c4ab = _c4ab
-                t.save()
+
+                if _cma1>80 or _cma1<8 or _cma2>80 or _cma2<8 or _cma3>80 or _cma3<8 or _cma4>80 or _cma4<8:
+
+                    messages.error(request,'Value Should be between 8 to 80')
+                    return redirect('/')
+                else:
+                
+                    t = ECDetails.objects.get(id=1)
+                    t.sensed_panel_rating = spr
+                    t.sensor_ct_rating = scr
+                    t.circuit_breaker_a = cba
+                    t.circuit_breaker_b = cbb
+                    t.c1 = _c1
+                    t.c1ab = _c1ab
+                    t.max_amp1 = _cma1
+                    t.c2 = _c2
+                    t.c2ab = _c2ab
+                    t.max_amp2 = _cma2
+                    t.c3 = _c3
+                    t.max_amp3 = _cma3
+                    t.c3ab = _c3ab
+                    t.c4 = _c4
+                    t.max_amp4 = _cma4
+                    t.c4ab = _c4ab
+                    t.save()
+                    messages.success(request,'Value Saves be Successfully')
 
                 val4 = serializers.serialize("json", ECDetails.objects.all())
                 res = ast.literal_eval(val4)
