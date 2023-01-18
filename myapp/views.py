@@ -99,6 +99,16 @@ def index(request):
                     messages.error(request,'weekend1 is either greater than 23 or less than 0')
                     return redirect('/')
                 
+                elif weekday1>weekday2:
+
+                    messages.error(request,'Weekday From value should be less than To value ')
+                    return redirect('/')
+                
+                elif weekend1>weekend2:
+
+                    messages.error(request,'Weekend From value should be less than To value ')
+                    return redirect('/')
+                
                 # elif weekend1.isnumeric()>23 or weekend1<0 weekend1>23 or weekend1<0:
 
                 #     messages.error(request,'weekend1 is either greater than 23 or less than 0')

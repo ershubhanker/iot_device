@@ -27,11 +27,9 @@
 
 
 @media screen and (max-width: 480px) {
-    body {
-      background-color: lightgreen;
-    }
+   
     .main-body{
-        background-color: rgb(104, 160, 104);
+        
         height: 100%;
     }
     .mobile,
@@ -39,14 +37,19 @@
         font-size: 12px;
         
     }
+
     .form-group label{
         font-size: 12px;
     }
 
+    .form-group lockout{
+        font-size: 12px;
+    }
+
+    
     hr{
         background-color: black;
         height: 5px;
     }
-
     
   }
