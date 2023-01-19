@@ -21,6 +21,20 @@ MESSAGE_TAGS = {
 json_dict = {'wifi':'','date_time':'','lockout':'','Electrical Config':''}
 def index(request):
     
+    Wifi_Details = WifiDetails.objects.all()
+    lockout_Details = lockoutDetails.objects.all()
+    EC_Details = ECDetails.objects.all()
+
+
+
+    choice1 = time_stamp
+    choice2 = channel
+    choice3 = sensed_panel_rating_choice
+    choice4 = circuit_breaker
+    choice5 = TIME_ZONE_CHOICES
+
+
+
     wifi_form = wifiForm(request.POST)
     datetime_form = DateTimeForm(request.POST)
     lock = LockoutForm(request.POST)
@@ -119,6 +133,10 @@ def index(request):
                     t.weekday2 = weekday2
                     t.weekend1 = weekend1
                     t.weekend2 = weekend2
+                    print('=========data received===========')
+
+                    messages.success(request,'Lockout Details Saved Succesfully')
+
 
                     t.save()
                     val3 = serializers.serialize("json", lockoutDetails.objects.all())
@@ -199,7 +217,7 @@ def index(request):
         ecform = EcForm()
         # ccaform = CcAssignmentForm()
 
-        return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform})
-    return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform})
+        return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform, 'choice1':choice1, 'choice2':choice2, 'choice3':choice3, 'choice4':choice4, 'choice5':choice5, 'Wifi_Details':Wifi_Details,'lockout_Details':lockout_Details,'EC_Details':EC_Details})
+    return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform, 'choice1':choice1, 'choice2':choice2, 'choice3':choice3, 'choice4':choice4, 'choice5':choice5, 'Wifi_Details':Wifi_Details,'lockout_Details':lockout_Details,'EC_Details':EC_Details})
     
 

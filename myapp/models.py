@@ -27,6 +27,7 @@ circuit_breaker = (
     ("60", "60"),
     ("70", "70"),
     ("80", "80"),
+    ("90", "90"),
     ("100", "100")
 )
 
@@ -80,10 +81,10 @@ class DateTimeDetails(models.Model):
 
 
 class lockoutDetails(models.Model):
-    weekday1 = models.CharField(max_length=30)
-    weekday2 = models.CharField(max_length=30)
-    weekend1 = models.CharField(max_length=30)
-    weekend2 = models.CharField(max_length=30)
+    weekday1 = models.CharField(max_length=30,null=True)
+    weekday2 = models.CharField(max_length=30,null=True,default='12')
+    weekend1 = models.CharField(max_length=30,null=True)
+    weekend2 = models.CharField(max_length=30,null=True,default='12')
     
 
 class ECDetails(models.Model):

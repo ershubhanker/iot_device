@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Josefin+Sans:ital,wght@0,300;1,400&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Josefin+Sans:ital,wght@0,300;1,400&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Ubuntu&display=swap');
+
 .container{
     margin-top: 5%;
     height: 100%;
@@ -16,13 +19,19 @@
 .head img{
     width: 200px;
 }
-
+.card{
+    margin-top: 3px;
+    /* border: 30px solid grey; */
+}
 .card-header button{
-    font-family: 'Caveat', cursive;
-    font-family: 'Josefin Sans', sans-serif;
+    /* font-family: 'Caveat', cursive; */
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     color: #1d1f1d;
     font-size: large;
     font-weight: 700;
+    padding-bottom: 10px;
 }
 
 

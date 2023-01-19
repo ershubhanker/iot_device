@@ -1,15 +1,17 @@
 {
-    "wifi": [
+    "wifi": "",
+    "date_time": "",
+    "lockout": [
         {
-            "model": "myapp.wifidetails",
+            "model": "myapp.lockoutdetails",
             "pk": 1,
             "fields": {
-                "ssid": "admin",
-                "password": "123456789"
+                "weekday1": "10",
+                "weekday2": "12",
+                "weekend1": "11",
+                "weekend2": "12"
             }
         }
     ],
-    "date_time": "",
-    "lockout": "",
     "Electrical Config": ""
 }
