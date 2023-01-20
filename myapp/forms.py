@@ -40,11 +40,31 @@ class DateTimeForm(ModelForm):
         
 
 class LockoutForm(forms.ModelForm):
+    weekday1 = forms.IntegerField(required=False,initial=10)
+    weekday2 = forms.IntegerField(required=False,initial=12)
+    weekend1 = forms.IntegerField(required=False,initial=10)
+    weekend2 = forms.IntegerField(required=False,initial=12)
+
+
     class Meta:
         model = lockoutDetails
         fields = "__all__"
 
 class EcForm(forms.ModelForm):
+    
+    c1 = forms.IntegerField(required=False,initial=12)
+    max_amp1 = forms.IntegerField(required=False,initial=12)
+    # c1ab = forms.IntegerField(required=False,initial='A')
+    c2 = forms.IntegerField(required=False,initial=12)
+    max_amp2 = forms.IntegerField(required=False,initial=12)
+    # c2ab = forms.IntegerField(required=False,initial='A')
+    c3 = forms.IntegerField(required=False,initial=12)
+    max_amp3 = forms.IntegerField(required=False,initial=12)
+    # c3ab = forms.IntegerField(required=False,initial='A')
+    c4 = forms.IntegerField(required=False,initial=12)
+    max_amp4 = forms.IntegerField(required=False,initial=12)
+    # c4ab = forms.IntegerField(required=False,initial='A')
+    
     class Meta:
         model = ECDetails
         fields = "__all__"

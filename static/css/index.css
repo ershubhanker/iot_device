@@ -21,7 +21,7 @@
 }
 .card{
     margin-top: 3px;
-    /* border: 30px solid grey; */
+    border-radius: 10px 30px 30px 10px;
 }
 .card-header button{
     /* font-family: 'Caveat', cursive; */

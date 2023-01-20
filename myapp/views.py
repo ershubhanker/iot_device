@@ -38,7 +38,11 @@ def index(request):
     wifi_form = wifiForm(request.POST)
     datetime_form = DateTimeForm(request.POST)
     lock = LockoutForm(request.POST)
+    # form = LockoutForm(initial={'weekday2': 12})
     ecform = EcForm(request.POST)
+
+
+    #----------------Custom Wi-Fi SSID--------------------- 
 
     if request.method == 'POST' and 'wifi' in request.POST:
         if wifi_form.is_valid():
@@ -65,6 +69,9 @@ def index(request):
             messages.error(request,wifi_form['password'].errors)
             return redirect('/')
 
+
+    #----------------Date and Time---------------------------
+
     if request.method == 'POST' and 'datetime' in request.POST: 
         if datetime_form.is_valid():
                 date_field = datetime_form.cleaned_data['_date']
@@ -89,13 +96,31 @@ def index(request):
                 with open("configuration.json", "w") as outfile:
                     outfile.write(json_object)
                 # print(json_dict)
-                
+
+
+    #----------------Date and Time---------------------------      
+          
     if request.method == 'POST' and 'lockout' in request.POST: 
         if lock.is_valid():
-                weekday1 = int(lock.cleaned_data['weekday1'])
-                weekday2 = int(lock.cleaned_data['weekday2'])
-                weekend1 = int(lock.cleaned_data['weekend1'])
-                weekend2 = int(lock.cleaned_data['weekend2'])
+                    # int(lock.cleaned_data['weekday1'])
+                # weekday1 = lock.cleaned_data.get('weekday1')
+                weekday1 = lock.cleaned_data.get('weekday1') if lock.cleaned_data.get('weekday1') else 11
+                # print('-------------',lock.cleaned_data)
+                # weekday2 = lock.cleaned_data.get('weekday2')
+                weekday2 = lock.cleaned_data.get('weekday2') if lock.cleaned_data.get('weekday2') else 12
+                # print('----------->',weekday2)
+                # weekend1 = lock.cleaned_data.get('weekend1')
+                weekend1 = lock.cleaned_data.get('weekend1') if lock.cleaned_data.get('weekend1') else 11
+                # weekend2 = lock.cleaned_data.get('weekend2')
+                weekend2 = lock.cleaned_data.get('weekend2') if lock.cleaned_data.get('weekend2') else 12
+
+                # if not weekday2:
+                #     weekday2 = 12
+                #     print(weekday2)
+                # if not weekend2:
+                #     weekend2 = 12
+                #     print(weekend2)
+                
                 if weekday1>23 or weekday1<0:
 
                     messages.error(request,'Weekday1 is either greater than 23 or less than 0')
@@ -129,11 +154,13 @@ def index(request):
                 #     return redirect('/')
                 else:
                     t = lockoutDetails.objects.get(id=1)
+                    # t = lockoutDetails.objects.filter(id=1).update(**request.data)
                     t.weekday1 = weekday1
                     t.weekday2 = weekday2
                     t.weekend1 = weekend1
                     t.weekend2 = weekend2
-                    print('=========data received===========')
+
+                    # print('=========data received===========')
 
                     messages.success(request,'Lockout Details Saved Succesfully')
 
@@ -153,25 +180,44 @@ def index(request):
                 # print("end1:",weekend1)
                 # print("end2:",weekend2)
 
+
+    #----------------Electric Configuration--------------
                 
     if request.method == 'POST' and 'ec' in request.POST: 
         if ecform.is_valid():
                 spr = ecform.cleaned_data['sensed_panel_rating']
+                # spr = ecform.cleaned_data.get('sensed_panel_rating') if ecform.cleaned_data.get('sensed_panel_rating') else 50
+                # print('------------------',ecform.cleaned_data)
                 scr = ecform.cleaned_data['sensor_ct_rating']
+                # scr = ecform.cleaned_data.get('sensor_ct_rating') if ecform.cleaned_data.get('sensor_ct_rating') else 50
                 cba = ecform.cleaned_data['circuit_breaker_a']
+                # cba = ecform.cleaned_data.get('circuit_breaker_a') if ecform.cleaned_data.get('circuit_breaker_a') else 15
                 cbb = ecform.cleaned_data['circuit_breaker_b']
-                _c1 = ecform.cleaned_data['c1']
-                _cma1 = ecform.cleaned_data['max_amp1']
+                # cbb = ecform.cleaned_data.get('circuit_breaker_b') if ecform.cleaned_data.get('circuit_breaker_b') else 0
+                # _c1 = ecform.cleaned_data['c1']
+                _c1 = ecform.cleaned_data.get('c1') if ecform.cleaned_data.get('c1') else 12
+                # _cma1 = ecform.cleaned_data['max_amp1']
+                _cma1 = ecform.cleaned_data.get('max_amp1') if ecform.cleaned_data.get('max_amp1') else 12
                 _c1ab = ecform.cleaned_data['c1ab']
-                _c2 = ecform.cleaned_data['c2']
-                _cma2 = ecform.cleaned_data['max_amp2']
+                # _c1ab = ecform.cleaned_data.get('c1ab') if ecform.cleaned_data.get('c1ab') else 'A'
+                # _c2 = ecform.cleaned_data['c2']
+                _c2 = ecform.cleaned_data.get('c2') if ecform.cleaned_data.get('c2') else 12
+                # _cma2 = ecform.cleaned_data['max_amp2']
+                _cma2 = ecform.cleaned_data.get('max_amp2') if ecform.cleaned_data.get('max_amp2') else 12
                 _c2ab = ecform.cleaned_data['c2ab']
-                _c3 = ecform.cleaned_data['c3']
-                _cma3 = ecform.cleaned_data['max_amp3']
+                # _c2ab = ecform.cleaned_data.get('c2ab') if ecform.cleaned_data.get('c2ab') else 'A'
+                # _c3 = ecform.cleaned_data['c3']
+                _c3 = ecform.cleaned_data.get('c3') if ecform.cleaned_data.get('c3') else 12
+                # _cma3 = ecform.cleaned_data['max_amp3']
+                _cma3 = ecform.cleaned_data.get('max_amp3') if ecform.cleaned_data.get('max_amp3') else 12
                 _c3ab = ecform.cleaned_data['c3ab']
-                _c4 = ecform.cleaned_data['c4']
-                _cma4 = ecform.cleaned_data['max_amp4']
+                # _c3ab = ecform.cleaned_data.get('c3ab') if ecform.cleaned_data.get('c3ab') else 'A'
+                # _c4 = ecform.cleaned_data['c4']
+                _c4 = ecform.cleaned_data.get('c4') if ecform.cleaned_data.get('c4') else 12
+                # _cma4 = ecform.cleaned_data['max_amp4']
+                _cma4 = ecform.cleaned_data.get('max_amp4') if ecform.cleaned_data.get('max_amp4') else 12
                 _c4ab = ecform.cleaned_data['c4ab']
+                # _c4ab = ecform.cleaned_data.get('c4ab') if ecform.cleaned_data.get('c4ab') else 'A'
 
                 if _cma1>80 or _cma1<8 or _cma2>80 or _cma2<8 or _cma3>80 or _cma3<8 or _cma4>80 or _cma4<8:
 

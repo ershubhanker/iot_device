@@ -81,10 +81,10 @@ class DateTimeDetails(models.Model):
 
 
 class lockoutDetails(models.Model):
-    weekday1 = models.CharField(max_length=30,null=True)
-    weekday2 = models.CharField(max_length=30,null=True,default='12')
-    weekend1 = models.CharField(max_length=30,null=True)
-    weekend2 = models.CharField(max_length=30,null=True,default='12')
+    weekday1 = models.CharField(max_length=30,null=True,blank=True)
+    weekday2 = models.CharField(max_length=30,null=True,blank=True)
+    weekend1 = models.CharField(max_length=30,null=True,blank=True)
+    weekend2 = models.CharField(max_length=30,null=True,blank=True)
     
 
 class ECDetails(models.Model):

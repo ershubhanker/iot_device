@@ -1,6 +1,25 @@
 {
-    "wifi": "",
-    "date_time": "",
+    "wifi": [
+        {
+            "model": "myapp.wifidetails",
+            "pk": 1,
+            "fields": {
+                "ssid": "admin",
+                "password": "12345678"
+            }
+        }
+    ],
+    "date_time": [
+        {
+            "model": "myapp.datetimedetails",
+            "pk": 1,
+            "fields": {
+                "_date": "2023-01-29",
+                "_time": "16:32:00",
+                "timezone": "-12.0"
+            }
+        }
+    ],
     "lockout": [
         {
             "model": "myapp.lockoutdetails",
@@ -8,10 +27,33 @@
             "fields": {
                 "weekday1": "10",
                 "weekday2": "12",
-                "weekend1": "11",
+                "weekend1": "9",
                 "weekend2": "12"
             }
         }
     ],
-    "Electrical Config": ""
+    "Electrical Config": [
+        {
+            "model": "myapp.ecdetails",
+            "pk": 1,
+            "fields": {
+                "sensed_panel_rating": "50",
+                "sensor_ct_rating": "50",
+                "circuit_breaker_a": "0",
+                "circuit_breaker_b": "0",
+                "c1": "10",
+                "max_amp1": 11,
+                "c1ab": "A",
+                "c2": "12",
+                "max_amp2": 12,
+                "c2ab": "A",
+                "c3": "12",
+                "max_amp3": 12,
+                "c3ab": "A",
+                "c4": "12",
+                "max_amp4": 12,
+                "c4ab": "A"
+            }
+        }
+    ]
 }
