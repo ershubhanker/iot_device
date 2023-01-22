@@ -211,13 +211,18 @@
         <div class="card-body">
           <form action="" method="post">
             {% csrf_token %}
-            
+           
             <div class="form-group">
               <label for="exampleInputPassword1">Sensed Panel Rating</label>
               <select class="form-control"  name="sensed_panel_rating" id="sensed_panel_rating">
+                {% comment %} <option class="form-control"  selected='selected' value="{{ ec.sensed_panel_rating }}">{{ ec.sensed_panel_rating }}</option> {% endcomment %}
+
                 {% for key,value in choice3 %}
+                {% for ec in EC_Details %}
                 
-                      <option class="form-control"  value="{{ key }}">{{ value }}</option>
+                      <option class="form-control"  value="{{ key }}" {% if ec.sensed_panel_rating == key %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+
                       {% endfor %}
               </select>
             </div>
@@ -227,7 +232,10 @@
               <select class="form-control"  name="sensor_ct_rating" id="sensor_ct_rating">
                 {% for key,value in choice3 %}
                 
-                      <option class="form-control"  value="{{ key }}">{{ value }}</option>
+                {% for ec in EC_Details %}
+                
+                <option class="form-control"  value="{{ key }}" {% if ec.sensor_ct_rating == key %}selected{% endif %}>{{ value }}</option>
+          {% endfor %}
                       {% endfor %}
               </select>
             </div>
@@ -238,7 +246,10 @@
                 
                 {% for key,value in choice4 %}
                 
-                      <option class="form-control"  value="{{ key }}">{{ value }}</option>
+                {% for ec in EC_Details %}
+                
+                <option class="form-control"  value="{{ key }}" {% if ec.circuit_breaker_a == key %}selected{% endif %}>{{ value }}</option>
+          {% endfor %}
                       {% endfor %}
               </select>
             </div>
@@ -249,7 +260,10 @@
               <select class="form-control"  name="circuit_breaker_b" id="circuit_breaker_b">
                 {% for key,value in choice4 %}
                 
-                      <option class="form-control"  value="{{ key }}">{{ value }}</option>
+                {% for ec in EC_Details %}
+                
+                <option class="form-control"  value="{{ key }}" {% if ec.circuit_breaker_b == key %}selected{% endif %}>{{ value }}</option>
+          {% endfor %}
                       {% endfor %}
               </select>
             </div>
@@ -280,7 +294,10 @@
                     <select class="form-control"  name="c1ab" id="c1ab">
                       {% for key,value in choice2 %}
                 
-                      <option class="form-control"  value="{{ key }}">{{ value }}</option>
+                      {% for ec in EC_Details %}
+                
+                      <option class="form-control"  value="{{ key }}" {% if ec.c1ab == key %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
                       {% endfor %}
                       
                     </select>
@@ -312,8 +329,13 @@
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
                     <select class="form-control"  name="c2ab" id="c2ab">
                 
-                      <option class="form-control"  value="A">A</option>
-                      <option class="form-control"  value="B">B</option>
+                      {% for key,value in choice2 %}
+                
+                      {% for ec in EC_Details %}
+                
+                      <option class="form-control"  value="{{ key }}" {% if ec.c2ab == key %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+                      {% endfor %}
                       
                     </select>
                   </div>
@@ -344,8 +366,13 @@
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
                     <select class="form-control"  name="c3ab" id="c3ab">
                 
-                      <option class="form-control"  value="A">A</option>
-                      <option class="form-control"  value="B">B</option>
+                      {% for key,value in choice2 %}
+                
+                      {% for ec in EC_Details %}
+                
+                      <option class="form-control"  value="{{ key }}" {% if ec.c3ab == key %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+                      {% endfor %}
                       
                     </select>
                   </div>
@@ -376,8 +403,13 @@
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
                     <select class="form-control"  name="c4ab" id="c4ab">
                 
-                      <option class="form-control"  value="A">A</option>
-                      <option class="form-control"  value="B">B</option>
+                      {% for key,value in choice2 %}
+                
+                      {% for ec in EC_Details %}
+                
+                      <option class="form-control"  value="{{ key }}" {% if ec.c4ab == key %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+                      {% endfor %}
                       
                     </select>
                   </div>

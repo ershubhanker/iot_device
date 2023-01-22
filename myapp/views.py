@@ -243,7 +243,7 @@ def index(request):
                     t.max_amp4 = _cma4
                     t.c4ab = _c4ab
                     t.save()
-                    messages.success(request,'Value Saves be Successfully')
+                    messages.success(request,'Value Saved Successfully')
 
                 val4 = serializers.serialize("json", ECDetails.objects.all())
                 res = ast.literal_eval(val4)
