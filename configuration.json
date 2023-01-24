@@ -2,7 +2,8 @@
     "wifi": "",
     "date_time": "",
     "lockout": "",
-    "Electrical Config": [
+    "Electrical Config": "",
+    "Electrical": [
         {
             "model": "myapp.ecdetails",
             "pk": 1,
@@ -11,18 +12,17 @@
                 "sensor_ct_rating": "100",
                 "circuit_breaker_a": "70",
                 "circuit_breaker_b": "90",
-                "c1": "12",
+                "c1": "1",
                 "max_amp1": 12,
-                "c1ab": "B",
-                "c2": "12",
-                "max_amp2": 12,
-                "c2ab": "B",
-                "c3": "12",
+                "c1_circuit": "A",
+                "c2": "2",
+                "max_amp2": 23,
+                "c2_circuit": "A",
                 "max_amp3": 12,
-                "c3ab": "B",
-                "c4": "12",
+                "c3_circuit": "A",
+                "c3": "12",
                 "max_amp4": 12,
-                "c4ab": "B"
+                "c4_circuit": "B"
             }
         }
     ]

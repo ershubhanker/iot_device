@@ -18,7 +18,6 @@ sensed_panel_rating_choice = (
 )
 
 circuit_breaker = (
-     ("0", "0"),
     ("15", "15"),
     ("20", "20"),
     ("30", "30"),
@@ -67,43 +66,49 @@ TIME_ZONE_CHOICES = (
 )
 
 class WifiDetails(models.Model):
-    ssid = models.CharField(max_length=30, editable=True)
-    password = models.CharField(max_length=30, editable=True)
+    ssid = models.CharField(max_length=30,null=True, editable=True)
+    password = models.CharField(max_length=30,null=True, editable=True)
     
 
 
 class DateTimeDetails(models.Model):
-    _date = models.DateField(null=True, editable=True)
-    _time = models.TimeField(null=True, editable=True)
+    date = models.DateField(null=True, editable=True)
+    local_time = models.TimeField(null=True, editable=True)
     # am_pm = models.CharField(max_length=30,choices = time_stamp,default='AM')
     timezone = models.CharField(max_length=30,choices=TIME_ZONE_CHOICES)
     
 
 
 class lockoutDetails(models.Model):
-    weekday1 = models.CharField(max_length=30,null=True,blank=True)
-    weekday2 = models.CharField(max_length=30,null=True,blank=True)
-    weekend1 = models.CharField(max_length=30,null=True,blank=True)
-    weekend2 = models.CharField(max_length=30,null=True,blank=True)
+    weekday_from_1 = models.CharField(max_length=30,null=True,blank=True)
+    weekday_to_1 = models.CharField(max_length=30,null=True,blank=True)
+    weekday_from_2 = models.CharField(max_length=30,null=True,blank=True)
+    weekday_to_2 = models.CharField(max_length=30,null=True,blank=True)
+
+    weekend_from_1 = models.CharField(max_length=30,null=True,blank=True)
+    weekend_to_1 = models.CharField(max_length=30,null=True,blank=True)
+    weekend_from_2 = models.CharField(max_length=30,null=True,blank=True)
+    weekend_to_2 = models.CharField(max_length=30,null=True,blank=True)
+
     
 
 class ECDetails(models.Model):
     id = models.AutoField(primary_key=True)
-    sensed_panel_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='50')
+    sensed_panel_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='100')
     sensor_ct_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='200')
-    circuit_breaker_a = models.CharField(max_length=30,choices = circuit_breaker,default='15')
+    circuit_breaker_a = models.CharField(max_length=30,choices = circuit_breaker,default='40')
     circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker,default='15')
 
-    c1 = models.CharField(max_length=30,null=True)
-    max_amp1 = models.IntegerField(null=True)
-    c1ab = models.CharField(max_length=30,choices = channel,default='A')
+    c1 = models.CharField(max_length=30,null=True, default='A')
+    max_amp1 = models.IntegerField(null=True,default=0)
+    c1_circuit = models.CharField(max_length=30,choices = channel,default='A')
     c2 = models.CharField(max_length=30,null=True)
-    max_amp2 = models.IntegerField(null=True)
-    c2ab = models.CharField(max_length=30,null=True,choices = channel,default='A')
+    max_amp2 = models.IntegerField(null=True,default=0)
+    c2_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
     c3 = models.CharField(max_length=30,null=True)
-    max_amp3 = models.IntegerField(null=True)
-    c3ab = models.CharField(max_length=30,null=True,choices = channel,default='A')
-    c4 = models.CharField(max_length=30,null=True)
-    max_amp4 = models.IntegerField(null=True)
-    c4ab = models.CharField(max_length=30,null=True,choices = channel,default='A')
+    max_amp3 = models.IntegerField(null=True,default=0)
+    c3_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
+    c3 = models.CharField(max_length=30,null=True)
+    max_amp4 = models.IntegerField(null=True,default=0)
+    c4_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
     

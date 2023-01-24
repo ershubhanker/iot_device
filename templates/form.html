@@ -62,7 +62,7 @@
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
           <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            Custom Wi-Fi SSID
+            Wi-Fi
           </button>
         </h5>
       </div>
@@ -74,8 +74,8 @@
             <!-- SSID -->
             <div class="form-group">
               <label for="exampleInputEmail1">SSID</label>
-              {% for wifi in Wifi_Details %}
-              <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" placeholder="{{ wifi.ssid }}">
+              <!-- {% for wifi in Wifi_Details %} -->
+              <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" >
               
               <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
             </div>
@@ -83,13 +83,13 @@
             <!-- passwod and repassword -->
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="password">
+              <input type="password" class="form-control" name="password" id="exampleInputPassword1"  >
               
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Confirm Password</label>
-              <input type="password" class="form-control" name="confirm_password"  id="exampleInputPassword1" placeholder=" confirm password">
-              {% endfor %}
+              <input type="password" class="form-control" name="confirm_password"  id="exampleInputPassword1" >
+              <!-- {% endfor %} -->
             </div>
             <input type="submit" class="btn btn-info" name="wifi">
           </form>
@@ -115,22 +115,21 @@
             <!-- <input class="form-control" type="time" name="_time"> -->
             <div class="form-group">
               <label for="exampleInputEmail1">Date</label>
-              <input type="date" min="2022-01-01" max="2099-12-31" class="form-control" name="_date" placeholder="Enter Date">
+              <input type="date" min="2022-01-01" max="2099-12-31" class="form-control" name="date" placeholder="Enter Date">
             </div>
             
             <div class="form-group">  
               <label for="exampleInputPassword1">Time</label>
               <!-- <input type="text" id="timepicker-12-hr" name="timepicker-12-hr" class="form-control timepicker-12-hr"> -->
-              <input type="time" class="form-control" name="_time" placeholder="Month">
+              <input type="time" class="form-control" name="local_time" placeholder="Month">
             </div>
 
 
             <div class="form-group">
               <label for="exampleInputPassword1">Time Zone</label>
               {% comment %} <input type="text" class="form-control" name="timezone" placeholder="Time Zone"> {% endcomment %}
-              <select class="form-control"  name="timezone" id="timezone">
+              <select class="form-control"  name="timezone" id="timezone" required>
                 {% for key,value in choice5 %}
-                
                       <option class="form-control"  value="{{ key }}">{{ value }}</option>
                       {% endfor %}
               </select>
@@ -159,37 +158,63 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Weekday Hour From</label>
+                  <label for="exampleInputEmail1">Weekday From</label>
                   {% for lockout in lockout_Details %}
-                  <input type="text" class="form-control lockout" name="weekday1" aria-describedby="emailHelp" placeholder="{{ lockout.weekday1 }}">
-                  <!-- <small id="text" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp" placeholder="{{ lockout.weekday_from_1 }}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
-                  <label for="exampleInputPassword1">Weekday Hour To</label>
-                  <input type="text" class="form-control lockout" name="weekday2" placeholder="{{ lockout.weekday2 }}">
+                  <label for="exampleInputPassword1">Weekday To</label>
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_1" placeholder="{{ lockout.weekday_to_1 }}">
                 </div>
               </div>
-             
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Weekday From</label>
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_2" placeholder="{{ lockout.weekday_from_2 }}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">  
+                  <label for="exampleInputPassword1">Weekday To</label>
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_2" placeholder="{{ lockout.weekday_to_2 }}">
+                </div>
+              </div>
             </div>
 
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Weekend Hour From</label>
-                  <input type="text" class="form-control lockout" name="weekend1"  placeholder="{{ lockout.weekend1 }}">
+                  <label for="exampleInputPassword1">Weekend From</label>
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekend_from_1"  placeholder="{{ lockout.weekend_from_1 }}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Weekend Hour To</label>
-                  <input type="text" class="form-control lockout" name="weekend2" placeholder="{{ lockout.weekend2 }}">
+                  <label for="exampleInputPassword1">Weekend To</label>
+                  <input type="number" class="form-control lockout" name="weekend_to_1" placeholder="{{ lockout.weekend_to_1 }}">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Weekend From</label>
+                  <input type="number" class="form-control lockout" name="weekend_from_2"  placeholder="{{ lockout.weekend_from_2 }}">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Weekend To</label>
+                  <input type="number" class="form-control lockout" name="weekend_from_2" placeholder="{{ lockout.weekend_from_2 }}">
                   {% endfor %}
                 </div>
               </div>
             </div>
-            
+
             <input type="submit" class="btn btn-info" name="lockout">
 
           </form>
@@ -203,9 +228,10 @@
       <div class="card-header" id="headingFour">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            Electrical Configuration 
+            Electrical 
           </button>
         </h5>
+        <div class="para"><p>Electrical settings must be made by a qualified electrical contractor. Incorrect settings will result in improper operation and can result in severe damage to the electrical system.</p></div>
       </div>
       <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
         <div class="card-body">
@@ -284,14 +310,14 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="text" class="form-control mobile" name="max_amp1" aria-describedby="emailHelp" placeholder="{{ ec.max_amp1 }}">
+                    <input type="number" class="form-control mobile" name="max_amp1" aria-describedby="emailHelp" placeholder="{{ ec.max_amp1 }}">
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c1ab" id="c1ab">
+                    <select class="form-control"  name="c1_circuit" id="c1ab">
                       {% for key,value in choice2 %}
                 
                       {% for ec in EC_Details %}
@@ -327,13 +353,13 @@
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c2ab" id="c2ab">
+                    <select class="form-control"  name="c2_circuit" id="c2ab">
                 
                       {% for key,value in choice2 %}
                 
                       {% for ec in EC_Details %}
                 
-                      <option class="form-control"  value="{{ key }}" {% if ec.c2ab == key %}selected{% endif %}>{{ value }}</option>
+                      <option class="form-control"  value="{{ key }}" {% if ec.c2_circuit == key %}selected{% endif %}>{{ value }}</option>
                 {% endfor %}
                       {% endfor %}
                       
@@ -364,13 +390,13 @@
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c3ab" id="c3ab">
+                    <select class="form-control"  name="c3_circuit" id="c3ab">
                 
                       {% for key,value in choice2 %}
                 
                       {% for ec in EC_Details %}
                 
-                      <option class="form-control"  value="{{ key }}" {% if ec.c3ab == key %}selected{% endif %}>{{ value }}</option>
+                      <option class="form-control"  value="{{ key }}" {% if ec.c3_circuit == key %}selected{% endif %}>{{ value }}</option>
                 {% endfor %}
                       {% endfor %}
                       
@@ -401,13 +427,13 @@
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c4ab" id="c4ab">
+                    <select class="form-control"  name="c4_circuit" id="c4ab">
                 
                       {% for key,value in choice2 %}
                 
                       {% for ec in EC_Details %}
                 
-                      <option class="form-control"  value="{{ key }}" {% if ec.c4ab == key %}selected{% endif %}>{{ value }}</option>
+                      <option class="form-control"  value="{{ key }}" {% if ec.c4_circuit == key %}selected{% endif %}>{{ value }}</option>
                 {% endfor %}
                       {% endfor %}
                       

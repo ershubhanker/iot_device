@@ -46,10 +46,20 @@ def index(request):
 
     if request.method == 'POST' and 'wifi' in request.POST:
         if wifi_form.is_valid():
-            _ssid = wifi_form.cleaned_data['ssid']
-            _password = wifi_form.cleaned_data['password']
+            # _ssid = wifi_form.cleaned_data['ssid']
+            _ssid = wifi_form.cleaned_data.get('ssid') if wifi_form.cleaned_data.get('ssid') else 'admin'
+            # _password = wifi_form.cleaned_data['password']
+            _password = wifi_form.cleaned_data.get('password') if wifi_form.cleaned_data.get('password') else 'password'
             # print("ssid:",_ssid)
             # wifi_form.save()
+
+            #password valiadtion
+            
+            # ---------------
+            if len(_password)<8:
+                messages.error(request,'The length be equal to or above 8 characters')
+                return redirect('/')
+
             t = WifiDetails.objects.get(id=1)
             t.ssid = _ssid  # change SSID field
             t.password = _password  # change SSID field
@@ -63,10 +73,11 @@ def index(request):
             # Writing to configuration.json
             with open("configuration.json", "w") as outfile:
                 outfile.write(json_object)
-            messages.success(request,'Wifi Details Saved Successfully')
+            messages.success(request,'Wi-Fi settings saved')
         else:
             # print(wifi_form['password'].errors)
-            messages.error(request,wifi_form['password'].errors)
+            messages.success(request,'Wi-Fi settings saved')
+            # messages.error(request,wifi_form['password'].errors)
             return redirect('/')
 
 
@@ -74,15 +85,16 @@ def index(request):
 
     if request.method == 'POST' and 'datetime' in request.POST: 
         if datetime_form.is_valid():
-                date_field = datetime_form.cleaned_data['_date']
-                time_field = datetime_form.cleaned_data['_time']
+                date_field = datetime_form.cleaned_data['date']
+                
+                time_field = datetime_form.cleaned_data['local_time']
                 
                 # _am_pm = datetime_form.cleaned_data['am_pm']
                 _tz = datetime_form.cleaned_data['timezone']
                 # datetime_form.save()
                 t = DateTimeDetails.objects.get(id=1)
-                t._date = date_field  # change SSID field
-                t._time = time_field  # change SSID field
+                t.date = date_field  # change SSID field
+                t.time = time_field  # change SSID field
                 # t.am_pm = _am_pm
                 t.timezone = _tz
                 messages.success(request,'Date Time Saved Succesfully')
@@ -104,50 +116,31 @@ def index(request):
         if lock.is_valid():
                     # int(lock.cleaned_data['weekday1'])
                 # weekday1 = lock.cleaned_data.get('weekday1')
-                weekday1 = lock.cleaned_data.get('weekday1') if lock.cleaned_data.get('weekday1') else 11
-                # print('-------------',lock.cleaned_data)
-                # weekday2 = lock.cleaned_data.get('weekday2')
-                weekday2 = lock.cleaned_data.get('weekday2') if lock.cleaned_data.get('weekday2') else 12
-                # print('----------->',weekday2)
-                # weekend1 = lock.cleaned_data.get('weekend1')
-                weekend1 = lock.cleaned_data.get('weekend1') if lock.cleaned_data.get('weekend1') else 11
-                # weekend2 = lock.cleaned_data.get('weekend2')
-                weekend2 = lock.cleaned_data.get('weekend2') if lock.cleaned_data.get('weekend2') else 12
+                weekday_from_1 = lock.cleaned_data.get('weekday_from_1') if lock.cleaned_data.get('weekday_from_1') else 11
+                weekday_to_1 = lock.cleaned_data.get('weekday_to_1') if lock.cleaned_data.get('weekday_to_1') else 12
+                weekday_from_2 = lock.cleaned_data.get('weekday_from_2') if lock.cleaned_data.get('weekday_from_2') else 11
+                weekday_to_2 = lock.cleaned_data.get('weekday_to_2') if lock.cleaned_data.get('weekday_to_2') else 12
 
-                # if not weekday2:
-                #     weekday2 = 12
-                #     print(weekday2)
-                # if not weekend2:
-                #     weekend2 = 12
-                #     print(weekend2)
+                weekend_from_1 = lock.cleaned_data.get('weekend_from_1') if lock.cleaned_data.get('weekend_from_1') else 11
+                weekend_to_1 = lock.cleaned_data.get('weekend_to_1') if lock.cleaned_data.get('weekend_to_1') else 12
+                weekend_from_2 = lock.cleaned_data.get('weekend_from_2') if lock.cleaned_data.get('weekend_from_2') else 11
+                weekend_to_2 = lock.cleaned_data.get('weekend_to_2') if lock.cleaned_data.get('weekend_to_2') else 12
+
                 
-                if weekday1>23 or weekday1<0:
-
-                    messages.error(request,'Weekday1 is either greater than 23 or less than 0')
+                if (weekday_from_1>23 or weekday_from_1<0) or (weekday_to_1>23 or weekday_to_1<0) or (weekday_from_2>23 or weekday_from_2<0) or (weekday_to_2>23 or weekday_to_2<0) :
+                    messages.error(request,'Values must be between 0 and 23')
                     return redirect('/')
-                elif weekday2>23 or weekday2<0:
 
-                    messages.error(request,'Weekday2 is either greater than 23 or less than 0')
+                elif (weekend_from_1>23 or weekend_from_1<0) or (weekend_to_1>23 or weekend_to_1<0) or (weekend_from_2>23 or weekend_from_2<0) or (weekend_to_2>23 or weekend_to_2<0):
+                    messages.error(request,'Values must be between 0 and 23')
                     return redirect('/')
-                elif weekend2>23 or weekend2<0:
 
-                    messages.error(request,'weekend2 is either greater than 23 or less than 0')
+                elif weekday_from_1>weekday_to_1 or weekday_from_2>weekday_to_2:
+                    messages.error(request,'From value must be less than To value')
                     return redirect('/')
-                elif weekend1>23 or weekend1<0:
-
-                    messages.error(request,'weekend1 is either greater than 23 or less than 0')
+                elif weekend_from_1>weekend_to_1 or weekend_from_2>weekend_to_2:
+                    messages.error(request,'From value must be less than To value')
                     return redirect('/')
-                
-                elif weekday1>weekday2:
-
-                    messages.error(request,'Weekday From value should be less than To value ')
-                    return redirect('/')
-                
-                elif weekend1>weekend2:
-
-                    messages.error(request,'Weekend From value should be less than To value ')
-                    return redirect('/')
-                
                 # elif weekend1.isnumeric()>23 or weekend1<0 weekend1>23 or weekend1<0:
 
                 #     messages.error(request,'weekend1 is either greater than 23 or less than 0')
@@ -155,30 +148,30 @@ def index(request):
                 else:
                     t = lockoutDetails.objects.get(id=1)
                     # t = lockoutDetails.objects.filter(id=1).update(**request.data)
-                    t.weekday1 = weekday1
-                    t.weekday2 = weekday2
-                    t.weekend1 = weekend1
-                    t.weekend2 = weekend2
+                    t.weekday_from_1 = weekday_from_1
+                    t.weekday_to_1 = weekday_to_1
+                    t.weekday_from_2 = weekday_from_2
+                    t.weekday_to_2 = weekday_to_2
+
+                    t.weekend_from_1 = weekend_from_1
+                    t.weekend_to_1 = weekend_to_1
+                    t.weekend_from_2 = weekend_from_2
+                    t.weekend_to_2 = weekend_to_2
 
                     # print('=========data received===========')
 
-                    messages.success(request,'Lockout Details Saved Succesfully')
+                    messages.success(request,'Time-of-Use settings saved')
 
 
                     t.save()
                     val3 = serializers.serialize("json", lockoutDetails.objects.all())
                     res = ast.literal_eval(val3)
-                    json_dict['lockout'] = res
+                    json_dict['tou_hold'] = res
                     json_object = json.dumps(json_dict, indent=4)
                     # Writing to configuration.json
                     with open("configuration.json", "w") as outfile:
                         outfile.write(json_object)
                     # print(json_dict)
-
-                # print("day1:",weekday1)
-                # print("day2:",weekday2)
-                # print("end1:",weekend1)
-                # print("end2:",weekend2)
 
 
     #----------------Electric Configuration--------------
@@ -198,30 +191,30 @@ def index(request):
                 _c1 = ecform.cleaned_data.get('c1') if ecform.cleaned_data.get('c1') else 12
                 # _cma1 = ecform.cleaned_data['max_amp1']
                 _cma1 = ecform.cleaned_data.get('max_amp1') if ecform.cleaned_data.get('max_amp1') else 12
-                _c1ab = ecform.cleaned_data['c1ab']
+                c1_circuit = ecform.cleaned_data['c1_circuit']
                 # _c1ab = ecform.cleaned_data.get('c1ab') if ecform.cleaned_data.get('c1ab') else 'A'
                 # _c2 = ecform.cleaned_data['c2']
                 _c2 = ecform.cleaned_data.get('c2') if ecform.cleaned_data.get('c2') else 12
                 # _cma2 = ecform.cleaned_data['max_amp2']
                 _cma2 = ecform.cleaned_data.get('max_amp2') if ecform.cleaned_data.get('max_amp2') else 12
-                _c2ab = ecform.cleaned_data['c2ab']
+                c2_circuit = ecform.cleaned_data['c2_circuit']
                 # _c2ab = ecform.cleaned_data.get('c2ab') if ecform.cleaned_data.get('c2ab') else 'A'
                 # _c3 = ecform.cleaned_data['c3']
                 _c3 = ecform.cleaned_data.get('c3') if ecform.cleaned_data.get('c3') else 12
                 # _cma3 = ecform.cleaned_data['max_amp3']
                 _cma3 = ecform.cleaned_data.get('max_amp3') if ecform.cleaned_data.get('max_amp3') else 12
-                _c3ab = ecform.cleaned_data['c3ab']
+                c3_circuit = ecform.cleaned_data['c3_circuit']
                 # _c3ab = ecform.cleaned_data.get('c3ab') if ecform.cleaned_data.get('c3ab') else 'A'
                 # _c4 = ecform.cleaned_data['c4']
                 _c4 = ecform.cleaned_data.get('c4') if ecform.cleaned_data.get('c4') else 12
                 # _cma4 = ecform.cleaned_data['max_amp4']
                 _cma4 = ecform.cleaned_data.get('max_amp4') if ecform.cleaned_data.get('max_amp4') else 12
-                _c4ab = ecform.cleaned_data['c4ab']
+                c4_circuit = ecform.cleaned_data['c4_circuit']
                 # _c4ab = ecform.cleaned_data.get('c4ab') if ecform.cleaned_data.get('c4ab') else 'A'
 
                 if _cma1>80 or _cma1<8 or _cma2>80 or _cma2<8 or _cma3>80 or _cma3<8 or _cma4>80 or _cma4<8:
 
-                    messages.error(request,'Value Should be between 8 to 80')
+                    messages.error(request,'Value must be between 8 and 80')
                     return redirect('/')
                 else:
                 
@@ -231,23 +224,23 @@ def index(request):
                     t.circuit_breaker_a = cba
                     t.circuit_breaker_b = cbb
                     t.c1 = _c1
-                    t.c1ab = _c1ab
+                    t.c1_circuit = c1_circuit
                     t.max_amp1 = _cma1
                     t.c2 = _c2
-                    t.c2ab = _c2ab
+                    t.c2_circuit = c2_circuit
                     t.max_amp2 = _cma2
                     t.c3 = _c3
                     t.max_amp3 = _cma3
-                    t.c3ab = _c3ab
+                    t.c3_circuit = c3_circuit
                     t.c4 = _c4
                     t.max_amp4 = _cma4
-                    t.c4ab = _c4ab
+                    t.c4_circuit = c4_circuit
                     t.save()
-                    messages.success(request,'Value Saved Successfully')
+                    messages.success(request,'Electrical settings saved')
 
                 val4 = serializers.serialize("json", ECDetails.objects.all())
                 res = ast.literal_eval(val4)
-                json_dict['Electrical Config'] = res
+                json_dict['Electrical'] = res
                 
                 # Serializing json
                 json_object = json.dumps(json_dict, indent=4)

@@ -47,6 +47,10 @@
         
     }
 
+    .head img{
+        width: 140px;
+    }
+
     .form-group label{
         font-size: 12px;
     }
@@ -62,3 +66,4 @@
     }
     
   }
+

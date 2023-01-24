@@ -5,27 +5,30 @@ from django.contrib.admin.widgets import  AdminDateWidget, AdminTimeWidget, Admi
 from beagledata import settings
 
 class wifiForm(forms.ModelForm):
-    confirm_password=forms.CharField(widget=forms.PasswordInput())
+    ssid = forms.CharField()
+    password = forms.CharField()    
+    # confirm_password=forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model = WifiDetails
-        fields = ('ssid','password','confirm_password')
+        fields = "__all__"
+        # fields = ('ssid','password','confirm_password')
 
-    def clean(self):
-        cleaned_data = super(wifiForm, self).clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
+    # def clean(self):
+    #     cleaned_data = super(wifiForm, self).clean()
+    #     password = cleaned_data.get("password")
+    #     confirm_password = cleaned_data.get("confirm_password")
 
-        if password != confirm_password:
-            msg = "Password Mismatch Error"
-            self.add_error('password', msg)
-            # raise forms.ValidationError(
-            #     "password and confirm_password does not match"
-            # )
+    #     if password != confirm_password:
+    #         msg = "Password Mismatch Error"
+    #         self.add_error('password', msg)
+    #         # raise forms.ValidationError(
+    #         #     "password and confirm_password does not match"
+    #         # )
         
-        min_length = 8
-        if len(password) < min_length:
-            msg = 'Password must be at least %s characters long.' % (str(min_length))
-            self.add_error('password', msg)
+    #     min_length = 8
+    #     if len(password) < min_length:
+    #         msg = 'Password must be at least %s characters long.' % (str(min_length))
+    #         self.add_error('password', msg)
             # raise forms.ValidationError(
             #     "Password must be at least 8 character"
             # )
@@ -40,10 +43,15 @@ class DateTimeForm(ModelForm):
         
 
 class LockoutForm(forms.ModelForm):
-    weekday1 = forms.IntegerField(required=False,initial=10)
-    weekday2 = forms.IntegerField(required=False,initial=12)
-    weekend1 = forms.IntegerField(required=False,initial=10)
-    weekend2 = forms.IntegerField(required=False,initial=12)
+    weekday_from_1 = forms.IntegerField(required=False,initial=10)
+    weekday_to_1 = forms.IntegerField(required=False,initial=12)
+    weekday_from_2 = forms.IntegerField(required=False,initial=10)
+    weekday_to_2 = forms.IntegerField(required=False,initial=12)
+
+    weekend_from_1 = forms.IntegerField(required=False,initial=10)
+    weekend_to_1 = forms.IntegerField(required=False,initial=12)
+    weekend_from_2 = forms.IntegerField(required=False,initial=10)
+    weekend_to_2 = forms.IntegerField(required=False,initial=12)
 
 
     class Meta:
