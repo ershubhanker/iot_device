@@ -58,6 +58,7 @@ class LockoutForm(forms.ModelForm):
         model = tou_details
         fields = "__all__"
 
+
 class EcForm(forms.ModelForm):
     
     c1 = forms.IntegerField(required=False,initial=12)

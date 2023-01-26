@@ -33,7 +33,10 @@
     font-weight: 700;
     padding-bottom: 10px;
 }
-
+.para{
+    margin-left: 15px;
+    font-size: 10px;
+}
 
 @media screen and (max-width: 480px) {
    
@@ -59,7 +62,9 @@
         font-size: 12px;
     }
 
-    
+    #chargerId{
+        width: 100%;
+    }
     hr{
         background-color: black;
         height: 5px;

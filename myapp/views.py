@@ -112,6 +112,8 @@ def index(request):
                 with open("configuration.json", "w") as outfile:
                     outfile.write(json_object)
                 # print(json_dict)
+        else:
+            messages.error(request,'Make sure select every field')
 
 
     #----------------lockoutDetails---------------------------      
@@ -192,25 +194,25 @@ def index(request):
                 cbb = ecform.cleaned_data['circuit_breaker_b']
                 # cbb = ecform.cleaned_data.get('circuit_breaker_b') if ecform.cleaned_data.get('circuit_breaker_b') else 0
                 # _c1 = ecform.cleaned_data['c1']
-                _c1 = ecform.cleaned_data.get('c1') if ecform.cleaned_data.get('c1') else 12
+                _c1 = ecform.cleaned_data.get('c1') if ecform.cleaned_data.get('c1') else ''
                 # _cma1 = ecform.cleaned_data['max_amp1']
                 _cma1 = ecform.cleaned_data.get('max_amp1') if ecform.cleaned_data.get('max_amp1') else 12
                 c1_circuit = ecform.cleaned_data['c1_circuit']
                 # _c1ab = ecform.cleaned_data.get('c1ab') if ecform.cleaned_data.get('c1ab') else 'A'
                 # _c2 = ecform.cleaned_data['c2']
-                _c2 = ecform.cleaned_data.get('c2') if ecform.cleaned_data.get('c2') else 12
+                _c2 = ecform.cleaned_data.get('c2') if ecform.cleaned_data.get('c2') else ''
                 # _cma2 = ecform.cleaned_data['max_amp2']
                 _cma2 = ecform.cleaned_data.get('max_amp2') if ecform.cleaned_data.get('max_amp2') else 12
                 c2_circuit = ecform.cleaned_data['c2_circuit']
                 # _c2ab = ecform.cleaned_data.get('c2ab') if ecform.cleaned_data.get('c2ab') else 'A'
                 # _c3 = ecform.cleaned_data['c3']
-                _c3 = ecform.cleaned_data.get('c3') if ecform.cleaned_data.get('c3') else 12
+                _c3 = ecform.cleaned_data.get('c3') if ecform.cleaned_data.get('c3') else ''
                 # _cma3 = ecform.cleaned_data['max_amp3']
                 _cma3 = ecform.cleaned_data.get('max_amp3') if ecform.cleaned_data.get('max_amp3') else 12
                 c3_circuit = ecform.cleaned_data['c3_circuit']
                 # _c3ab = ecform.cleaned_data.get('c3ab') if ecform.cleaned_data.get('c3ab') else 'A'
                 # _c4 = ecform.cleaned_data['c4']
-                _c4 = ecform.cleaned_data.get('c4') if ecform.cleaned_data.get('c4') else 12
+                _c4 = ecform.cleaned_data.get('c4') if ecform.cleaned_data.get('c4') else ''
                 # _cma4 = ecform.cleaned_data['max_amp4']
                 _cma4 = ecform.cleaned_data.get('max_amp4') if ecform.cleaned_data.get('max_amp4') else 12
                 c4_circuit = ecform.cleaned_data['c4_circuit']

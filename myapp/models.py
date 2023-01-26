@@ -32,7 +32,6 @@ circuit_breaker = (
 
 # https://www.djangosnippets.org/snippets/2703/
 TIME_ZONE_CHOICES = (
-    ('none','-------------Select Time Zone----------------'),
      ('-12.0', '(UTC -12:00) Eniwetok, Kwajalein'),
      ('-11.0', '(UTC -11:00) Midway Island, Samoa'),
      ('-10.0', '(UTC -10:00) Hawaii'),
@@ -94,21 +93,21 @@ class tou_details(models.Model):
 
 class ECDetails(models.Model):
     id = models.AutoField(primary_key=True)
-    sensed_panel_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='100')
+    sensed_panel_rating = models.IntegerField(null=True, blank=True,default='100')
     sensor_ct_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='200')
     circuit_breaker_a = models.CharField(max_length=30,choices = circuit_breaker,default='40')
     circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker,default='15')
 
-    c1 = models.CharField(max_length=30,null=True, default='A')
+    c1 = models.CharField(max_length=30,null=True, default='')
     max_amp1 = models.IntegerField(null=True,default=0)
     c1_circuit = models.CharField(max_length=30,choices = channel,default='A')
-    c2 = models.CharField(max_length=30,null=True)
+    c2 = models.CharField(max_length=30,null=True,default='')
     max_amp2 = models.IntegerField(null=True,default=0)
     c2_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
-    c3 = models.CharField(max_length=30,null=True)
+    c3 = models.CharField(max_length=30,null=True,default='')
     max_amp3 = models.IntegerField(null=True,default=0)
     c3_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
-    c4 = models.CharField(max_length=30,null=True)
+    c4 = models.CharField(max_length=30,null=True,default='')
     max_amp4 = models.IntegerField(null=True,default=0)
     c4_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
     
