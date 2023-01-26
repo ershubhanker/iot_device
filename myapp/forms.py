@@ -55,7 +55,7 @@ class LockoutForm(forms.ModelForm):
 
 
     class Meta:
-        model = lockoutDetails
+        model = tou_details
         fields = "__all__"
 
 class EcForm(forms.ModelForm):

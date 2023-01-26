@@ -24,7 +24,7 @@ admin.site.register(WifiDetails)
     # readonly_fields = ('_date', '_time')
     
 admin.site.register(DateTimeDetails)
-admin.site.register(lockoutDetails)
+admin.site.register(tou_details)
 # class lockoutDetailsAdmin(admin.ModelAdmin):
 #     def has_add_permission(self, request):
 #         return False

@@ -22,7 +22,7 @@ json_dict = {'wifi':'','date_time':'','lockout':'','Electrical Config':''}
 def index(request):
     
     Wifi_Details = WifiDetails.objects.all()
-    lockout_Details = lockoutDetails.objects.all()
+    lockout_Details = tou_details.objects.all()
     EC_Details = ECDetails.objects.all()
 
 
@@ -60,25 +60,29 @@ def index(request):
                 messages.error(request,'The length be equal to or above 8 characters')
                 return redirect('/')
 
-            t = WifiDetails.objects.get(id=1)
-            t.ssid = _ssid  # change SSID field
-            t.password = _password  # change SSID field
-            t.save() # this will update only
-            val1 = serializers.serialize("json", WifiDetails.objects.all())
-            # print(val1)
-            res = ast.literal_eval(val1)
-            json_dict['wifi'] = res
-            json_object = json.dumps(json_dict, indent=4)
+
+            else:
+                t = WifiDetails.objects.get(id=1)
+                t.ssid = _ssid  # change SSID field
+                t.password = _password  # change SSID field
+                t.save() # this will update only
+                messages.success(request,'Wi-Fi settings saved')
+            
+                val1 = serializers.serialize("json", WifiDetails.objects.all())
+                print('---------------',val1)
+                res = ast.literal_eval(val1)
+                json_dict['wifi'] = res
+                json_object = json.dumps(json_dict, indent=4)
 
             # Writing to configuration.json
-            with open("configuration.json", "w") as outfile:
-                outfile.write(json_object)
-            messages.success(request,'Wi-Fi settings saved')
-        else:
-            # print(wifi_form['password'].errors)
-            messages.success(request,'Wi-Fi settings saved')
-            # messages.error(request,wifi_form['password'].errors)
-            return redirect('/')
+                with open("configuration.json", "w") as outfile:
+                    outfile.write(json_object)
+            # messages.success(request,'Wi-Fi settings saved')
+        # else:
+        #     # print(wifi_form['password'].errors)
+            
+        #     # messages.error(request,wifi_form['password'].errors)
+        #     return redirect('/')
 
 
     #----------------Date and Time---------------------------
@@ -94,10 +98,10 @@ def index(request):
                 # datetime_form.save()
                 t = DateTimeDetails.objects.get(id=1)
                 t.date = date_field  # change SSID field
-                t.time = time_field  # change SSID field
+                t.local_time = time_field  # change SSID field
                 # t.am_pm = _am_pm
                 t.timezone = _tz
-                messages.success(request,'Date Time Saved Succesfully')
+                messages.success(request,'Date and Time saved')
                 
                 t.save()
                 val2 = serializers.serialize("json", DateTimeDetails.objects.all())
@@ -110,7 +114,7 @@ def index(request):
                 # print(json_dict)
 
 
-    #----------------Date and Time---------------------------      
+    #----------------lockoutDetails---------------------------      
           
     if request.method == 'POST' and 'lockout' in request.POST: 
         if lock.is_valid():
@@ -146,7 +150,7 @@ def index(request):
                 #     messages.error(request,'weekend1 is either greater than 23 or less than 0')
                 #     return redirect('/')
                 else:
-                    t = lockoutDetails.objects.get(id=1)
+                    t = tou_details.objects.get(id=1)
                     # t = lockoutDetails.objects.filter(id=1).update(**request.data)
                     t.weekday_from_1 = weekday_from_1
                     t.weekday_to_1 = weekday_to_1
@@ -164,7 +168,7 @@ def index(request):
 
 
                     t.save()
-                    val3 = serializers.serialize("json", lockoutDetails.objects.all())
+                    val3 = serializers.serialize("json", tou_details.objects.all())
                     res = ast.literal_eval(val3)
                     json_dict['tou_hold'] = res
                     json_object = json.dumps(json_dict, indent=4)
