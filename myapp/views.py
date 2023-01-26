@@ -184,8 +184,8 @@ def index(request):
                 
     if request.method == 'POST' and 'ec' in request.POST: 
         if ecform.is_valid():
-                spr = ecform.cleaned_data['sensed_panel_rating']
-                # spr = ecform.cleaned_data.get('sensed_panel_rating') if ecform.cleaned_data.get('sensed_panel_rating') else 50
+                # spr = ecform.cleaned_data['sensed_panel_rating']
+                spr = ecform.cleaned_data.get('sensed_panel_rating') if ecform.cleaned_data.get('sensed_panel_rating') else 100
                 # print('------------------',ecform.cleaned_data)
                 scr = ecform.cleaned_data['sensor_ct_rating']
                 # scr = ecform.cleaned_data.get('sensor_ct_rating') if ecform.cleaned_data.get('sensor_ct_rating') else 50
