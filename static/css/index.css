@@ -53,7 +53,9 @@
     .head img{
         width: 140px;
     }
+    /* .col-6{
 
+    } */
     .form-group label{
         font-size: 12px;
     }
@@ -62,9 +64,10 @@
         font-size: 12px;
     }
 
-    #chargerId{
+    /* .col-6{
         width: 100%;
-    }
+    } */
+
     hr{
         background-color: black;
         height: 5px;

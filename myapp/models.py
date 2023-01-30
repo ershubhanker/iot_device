@@ -93,7 +93,7 @@ class tou_details(models.Model):
 
 class ECDetails(models.Model):
     id = models.AutoField(primary_key=True)
-    sensed_panel_rating = models.IntegerField(null=True, blank=True,default='100')
+    sensed_panel_rating = models.IntegerField(null=True, blank=True,default=100)
     sensor_ct_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='200')
     circuit_breaker_a = models.CharField(max_length=30,choices = circuit_breaker,default='40')
     circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker,default='15')
