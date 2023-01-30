@@ -86,15 +86,17 @@
             <!-- passwod and repassword -->
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" name="password" id="exampleInputPassword1"  >
+              <input type="password" class="form-control" name="password" id="password"  >
               
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Confirm Password</label>
-              <input type="password" class="form-control" name="confirm_password"  id="exampleInputPassword1" >
+              <input type="password" class="form-control" name="confirm_password"  id="confirm_password" >
+              <div id="error_message" style="display: none; color: red;"></div>
               <!-- {% endfor %} -->
             </div>
-            <input type="submit" class="btn btn-info" name="wifi">
+            
+            <input type="submit" class="btn btn-info" name="wifi" onclick="return validate()">
           </form>
         </div>
       </div> 
@@ -134,8 +136,14 @@
               {% comment %} <input type="text" class="form-control" name="timezone" placeholder="Time Zone"> {% endcomment %}
               <select class="form-control"  name="timezone" id="timezone" required>
                 <option class="form-control" disabled='True' selected>-------------Select Time Zone----------------</option>
+                
+                
                 {% for key,value in choice5 %}
-                      <option class="form-control"  value="{{ key }}">{{ value }}</option>
+                {% for t in Date_and_Time %}
+                <option class="form-control"  value="{{ key }}" {% if t.timezone == key %}selected{% endif %}>{{ value }}</option>
+
+                      {% comment %} <option class="form-control"  value="{{ key }}">{{ value }}</option> {% endcomment %}
+                      {% endfor %}
                       {% endfor %}
               </select>
             </div>
@@ -457,6 +465,31 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+<script>
+  // --------------------password error logic----------------------
+function validate() {
+  var password = document.getElementById("password").value;
+  var confirm_password = document.getElementById("confirm_password").value;
+  var error_message = document.getElementById("error_message");
+
+  if (password.length < 8) {
+    error_message.innerHTML = "Password must be at least 8 characters long";
+    error_message.style.display = "block";
+    return false;
+  }
+
+  if (password != confirm_password) {
+    error_message.innerHTML = "Password mismatch error";
+    error_message.style.display = "block";
+    return false;
+  }
+
+  return true;
+}
+
+</script>
 
 </body>
 </html>

@@ -65,8 +65,8 @@ TIME_ZONE_CHOICES = (
 )
 
 class WifiDetails(models.Model):
-    ssid = models.CharField(max_length=30,null=True)
-    password = models.CharField(max_length=30,null=True)
+    ssid = models.CharField(max_length=30,null=True, blank=True)
+    password = models.CharField(max_length=30,null=True, blank=True)
     
 
 

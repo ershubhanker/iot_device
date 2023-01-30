@@ -5,12 +5,36 @@
             "model": "myapp.datetimedetails",
             "pk": 1,
             "fields": {
-                "date": "2023-01-28",
-                "local_time": "23:34:00",
-                "timezone": "-2.0"
+                "date": "2023-01-31",
+                "local_time": "22:20:00",
+                "timezone": "4.0"
             }
         }
     ],
     "lockout": "",
-    "Electrical Config": ""
+    "Electrical Config": "",
+    "Electrical": [
+        {
+            "model": "myapp.ecdetails",
+            "pk": 1,
+            "fields": {
+                "sensed_panel_rating": 100,
+                "sensor_ct_rating": "100",
+                "circuit_breaker_a": "70",
+                "circuit_breaker_b": "60",
+                "c1": "",
+                "max_amp1": 8,
+                "c1_circuit": "A",
+                "c2": "",
+                "max_amp2": 12,
+                "c2_circuit": "A",
+                "c3": "",
+                "max_amp3": 12,
+                "c3_circuit": "A",
+                "c4": "",
+                "max_amp4": 12,
+                "c4_circuit": "B"
+            }
+        }
+    ]
 }

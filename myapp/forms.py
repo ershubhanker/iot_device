@@ -5,8 +5,8 @@ from django.contrib.admin.widgets import  AdminDateWidget, AdminTimeWidget, Admi
 from beagledata import settings
 
 class wifiForm(forms.ModelForm):
-    ssid = forms.CharField()
-    password = forms.CharField()    
+    ssid = forms.CharField(required=False)
+    password = forms.CharField(required=False)    
     # confirm_password=forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model = WifiDetails
