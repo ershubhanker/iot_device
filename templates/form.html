@@ -174,13 +174,13 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
                   {% for lockout in lockout_Details %}
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp" placeholder="{{ lockout.weekday_from_1 }}">
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp" value="{{ lockout.weekday_from_1 }}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_1" placeholder="{{ lockout.weekday_to_1 }}">
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_1" value="{{ lockout.weekday_to_1 }}">
                 </div>
               </div>
             </div>
@@ -188,13 +188,13 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_2" placeholder="{{ lockout.weekday_from_2 }}">
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_2" placeholder="{{ lockout.weekday_to_2 }}">
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}">
                 </div>
               </div>
             </div>
@@ -203,13 +203,13 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend From</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekend_from_1"  placeholder="{{ lockout.weekend_from_1 }}">
+                  <input type="number" min='0' max='23' class="form-control lockout" name="weekend_from_1"  value="{{ lockout.weekend_from_1 }}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend To</label>
-                  <input type="number" class="form-control lockout" name="weekend_to_1" placeholder="{{ lockout.weekend_to_1 }}">
+                  <input type="number" class="form-control lockout" name="weekend_to_1" value="{{ lockout.weekend_to_1 }}">
                 </div>
               </div>
             </div>
@@ -217,13 +217,13 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend From</label>
-                  <input type="number" class="form-control lockout" name="weekend_from_2"  placeholder="{{ lockout.weekend_from_2 }}">
+                  <input type="number" class="form-control lockout" name="weekend_from_2"  value="{{ lockout.weekend_from_2 }}">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend To</label>
-                  <input type="number" class="form-control lockout" name="weekend_from_2" placeholder="{{ lockout.weekend_from_2 }}">
+                  <input type="number" class="form-control lockout" name="weekend_from_2" value="{{ lockout.weekend_from_2 }}">
                   {% endfor %}
                 </div>
               </div>
@@ -319,7 +319,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile"  min="8" max="80" name="max_amp1" aria-describedby="emailHelp" placeholder="{{ ec.max_amp1 }}">
+                    <input type="number" class="form-control mobile"  min="8" max="80" name="max_amp1" aria-describedby="emailHelp" value="{{ ec.max_amp1 }}">
                   </div>
                 </div>
                 <div class="col-6">
@@ -355,7 +355,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp2"  min="8" max="80" aria-describedby="emailHelp" placeholder="{{ ec.max_amp2 }}">
+                    <input type="number" class="form-control mobile" name="max_amp2"  min="8" max="80" aria-describedby="emailHelp" value="{{ ec.max_amp2 }}">
                   </div>
                 </div>
                 <div class="col-6">
@@ -392,7 +392,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp3"  min="8" max="80" aria-describedby="emailHelp" placeholder="{{ ec.max_amp3 }}">
+                    <input type="number" class="form-control mobile" name="max_amp3"  min="8" max="80" aria-describedby="emailHelp" value="{{ ec.max_amp3 }}">
                   </div>
                 </div>
                 <div class="col-6">
@@ -428,7 +428,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp4"  min="8" max="80" aria-describedby="emailHelp" placeholder="{{ ec.max_amp4 }}">
+                    <input type="number" class="form-control mobile" name="max_amp4"  min="8" max="80" aria-describedby="emailHelp" value="{{ ec.max_amp4 }}">
                     {% endfor %}
                   </div>
                 </div>

@@ -1,15 +1,30 @@
 {
-    "wifi": [
-        {
-            "model": "myapp.wifidetails",
-            "pk": 1,
-            "fields": {
-                "ssid": "aniket",
-                "password": "87654321"
-            }
-        }
-    ],
+    "wifi": "",
     "date_time": "",
     "lockout": "",
-    "Electrical Config": ""
+    "Electrical Config": "",
+    "Electrical": [
+        {
+            "model": "myapp.ecdetails",
+            "pk": 1,
+            "fields": {
+                "sensed_panel_rating": 58,
+                "sensor_ct_rating": "100",
+                "circuit_breaker_a": "50",
+                "circuit_breaker_b": "0",
+                "c1": "",
+                "max_amp1": 10,
+                "c1_circuit": "B",
+                "c2": "",
+                "max_amp2": 12,
+                "c2_circuit": "A",
+                "c3": "",
+                "max_amp3": 12,
+                "c3_circuit": "A",
+                "c4": "",
+                "max_amp4": 12,
+                "c4_circuit": "B"
+            }
+        }
+    ]
 }

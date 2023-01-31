@@ -216,6 +216,11 @@ def index(request):
 
                     messages.error(request,'Value must be between 8 and 80')
                     return redirect('/')
+
+                if cbb == '0' and ((c1_circuit =='B') or (c2_circuit =='B') or (c3_circuit =='B') or (c4_circuit == 'B')):
+                    messages.error(request,'Circuit must be A when Circuit Breaker B is 0')
+                    return redirect('/')
+
                 else:
                 
                     t = ECDetails.objects.get(id=1)
