@@ -32,6 +32,7 @@ def index(request):
     choice3 = sensed_panel_rating_choice
     choice4 = circuit_breaker
     choice5 = TIME_ZONE_CHOICES
+    choice6 = circuit_breaker2
 
 
 
@@ -46,23 +47,16 @@ def index(request):
 
     if request.method == 'POST' and 'wifi' in request.POST:
         if wifi_form.is_valid():
-            # _ssid = wifi_form.cleaned_data['ssid']
-            _ssid = wifi_form.cleaned_data.get('ssid') if wifi_form.cleaned_data.get('ssid') else 'varian_secure'
+            _ssid = wifi_form.cleaned_data['ssid']
+            # _ssid = wifi_form.cleaned_data.get('ssid') if wifi_form.cleaned_data.get('ssid') else 'varian_secure'
             # _password = wifi_form.cleaned_data['password']
             _password = wifi_form.cleaned_data.get('password') if wifi_form.cleaned_data.get('password') else 'varian'
             # print("ssid:",_ssid)
             # wifi_form.save()
 
-            #password valiadtion
-            
-            # ---------------
-            # if len(_password)<8:
-            #     messages.error(request,'The length be equal to or above 8 characters')
-            #     return redirect('/')
-
-
             t = WifiDetails.objects.get(id=1)
-            t.ssid = _ssid  # change SSID field
+            if wifi_form.cleaned_data.get('ssid'):
+                t.ssid = _ssid  # change SSID field
             t.password = _password  # change SSID field
             t.save() # this will update only
             messages.success(request,'Wi-Fi settings saved')
@@ -77,10 +71,10 @@ def index(request):
             with open("configuration.json", "w") as outfile:
                 outfile.write(json_object)
             # messages.success(request,'Wi-Fi settings saved')
-        else:
-            # print(wifi_form['password'].errors)
+        # else:
+        #     # print(wifi_form['password'].errors)
             
-            messages.error(request,wifi_form['password'].errors)
+        #     messages.error(request,wifi_form['password'].errors)
         #     return redirect('/')
 
 
@@ -262,7 +256,7 @@ def index(request):
         ecform = EcForm()
         # ccaform = CcAssignmentForm()
 
-        return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform, 'choice1':choice1, 'choice2':choice2, 'choice3':choice3, 'choice4':choice4, 'choice5':choice5, 'Wifi_Details':Wifi_Details,'lockout_Details':lockout_Details,'EC_Details':EC_Details,'Date_and_Time': Date_and_Time})
-    return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform, 'choice1':choice1, 'choice2':choice2, 'choice3':choice3, 'choice4':choice4, 'choice5':choice5, 'Wifi_Details':Wifi_Details,'lockout_Details':lockout_Details,'EC_Details':EC_Details,'Date_and_Time': Date_and_Time})
+        return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform, 'choice1':choice1, 'choice2':choice2, 'choice3':choice3, 'choice4':choice4, 'choice5':choice5,'choice6':choice6,'Wifi_Details':Wifi_Details,'lockout_Details':lockout_Details,'EC_Details':EC_Details,'Date_and_Time': Date_and_Time})
+    return render(request,'form.html',{'wifi_form': wifi_form,'datetime_form':datetime_form,'lock':lock,'ecform':ecform, 'choice1':choice1, 'choice2':choice2, 'choice3':choice3, 'choice4':choice4, 'choice5':choice5,'choice6':choice6, 'Wifi_Details':Wifi_Details,'lockout_Details':lockout_Details,'EC_Details':EC_Details,'Date_and_Time': Date_and_Time})
     
 

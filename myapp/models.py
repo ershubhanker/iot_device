@@ -29,6 +29,19 @@ circuit_breaker = (
     ("90", "90"),
     ("100", "100")
 )
+circuit_breaker2 = (
+    ("0", "0"),
+    ("15", "15"),
+    ("20", "20"),
+    ("30", "30"),
+    ("40", "40"),
+    ("50", "50"),
+    ("60", "60"),
+    ("70", "70"),
+    ("80", "80"),
+    ("90", "90"),
+    ("100", "100")
+)
 
 # https://www.djangosnippets.org/snippets/2703/
 TIME_ZONE_CHOICES = (
@@ -65,8 +78,8 @@ TIME_ZONE_CHOICES = (
 )
 
 class WifiDetails(models.Model):
-    ssid = models.CharField(max_length=30,null=True, blank=True)
-    password = models.CharField(max_length=30,null=True, blank=True)
+    ssid = models.CharField(max_length=30,null=True, blank=True,default='varian_secure')
+    password = models.CharField(max_length=30,null=True, blank=True, default='varian')
     
 
 
@@ -96,7 +109,7 @@ class ECDetails(models.Model):
     sensed_panel_rating = models.IntegerField(null=True, blank=True,default=100)
     sensor_ct_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='200')
     circuit_breaker_a = models.CharField(max_length=30,choices = circuit_breaker,default='40')
-    circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker,default='15')
+    circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker2,default='15')
 
     c1 = models.CharField(max_length=30,null=True, default='')
     max_amp1 = models.IntegerField(null=True,default=0)

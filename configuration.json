@@ -4,36 +4,12 @@
             "model": "myapp.wifidetails",
             "pk": 1,
             "fields": {
-                "ssid": "varian_secure",
+                "ssid": "aniket",
                 "password": "87654321"
             }
         }
     ],
     "date_time": "",
     "lockout": "",
-    "Electrical Config": "",
-    "Electrical": [
-        {
-            "model": "myapp.ecdetails",
-            "pk": 1,
-            "fields": {
-                "sensed_panel_rating": 100,
-                "sensor_ct_rating": "100",
-                "circuit_breaker_a": "70",
-                "circuit_breaker_b": "60",
-                "c1": "123456789123456789",
-                "max_amp1": 12,
-                "c1_circuit": "A",
-                "c2": "",
-                "max_amp2": 12,
-                "c2_circuit": "A",
-                "c3": "",
-                "max_amp3": 12,
-                "c3_circuit": "A",
-                "c4": "",
-                "max_amp4": 12,
-                "c4_circuit": "B"
-            }
-        }
-    ]
+    "Electrical Config": ""
 }

@@ -293,7 +293,7 @@
             <div class="form-group">
               <label for="exampleInputPassword1">Circuit Breaker B</label>
               <select class="form-control"  name="circuit_breaker_b" id="circuit_breaker_b">
-                {% for key,value in choice4 %}
+                {% for key,value in choice6 %}
                 
                 {% for ec in EC_Details %}
                 
@@ -319,7 +319,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp1" aria-describedby="emailHelp" placeholder="{{ ec.max_amp1 }}">
+                    <input type="number" class="form-control mobile"  min="8" max="80" name="max_amp1" aria-describedby="emailHelp" placeholder="{{ ec.max_amp1 }}">
                   </div>
                 </div>
                 <div class="col-6">
@@ -355,7 +355,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp2" aria-describedby="emailHelp" placeholder="{{ ec.max_amp2 }}">
+                    <input type="number" class="form-control mobile" name="max_amp2"  min="8" max="80" aria-describedby="emailHelp" placeholder="{{ ec.max_amp2 }}">
                   </div>
                 </div>
                 <div class="col-6">
@@ -392,7 +392,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp3" aria-describedby="emailHelp" placeholder="{{ ec.max_amp3 }}">
+                    <input type="number" class="form-control mobile" name="max_amp3"  min="8" max="80" aria-describedby="emailHelp" placeholder="{{ ec.max_amp3 }}">
                   </div>
                 </div>
                 <div class="col-6">
@@ -428,7 +428,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp4" aria-describedby="emailHelp" placeholder="{{ ec.max_amp4 }}">
+                    <input type="number" class="form-control mobile" name="max_amp4"  min="8" max="80" aria-describedby="emailHelp" placeholder="{{ ec.max_amp4 }}">
                     {% endfor %}
                   </div>
                 </div>
