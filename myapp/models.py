@@ -109,7 +109,7 @@ class ECDetails(models.Model):
     sensed_panel_rating = models.IntegerField(null=True, blank=True,default=100)
     sensor_ct_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='200')
     circuit_breaker_a = models.CharField(max_length=30,choices = circuit_breaker,default='40')
-    circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker2,default='15')
+    circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker2,default='0')
 
     c1 = models.CharField(max_length=30,null=True, default='')
     max_amp1 = models.IntegerField(null=True,default=0)
