@@ -92,15 +92,15 @@ class DateTimeDetails(models.Model):
 
 
 class tou_details(models.Model):
-    weekday_from_1 = models.CharField(max_length=30,null=True,blank=True)
-    weekday_to_1 = models.CharField(max_length=30,null=True,blank=True)
-    weekday_from_2 = models.CharField(max_length=30,null=True,blank=True)
-    weekday_to_2 = models.CharField(max_length=30,null=True,blank=True)
+    weekday_from_1 = models.CharField(max_length=30,null=True,blank=True,default=11)
+    weekday_to_1 = models.CharField(max_length=30,null=True,blank=True,default=12)
+    weekday_from_2 = models.CharField(max_length=30,null=True,blank=True,default=11)
+    weekday_to_2 = models.CharField(max_length=30,null=True,blank=True,default=12)
 
-    weekend_from_1 = models.CharField(max_length=30,null=True,blank=True)
-    weekend_to_1 = models.CharField(max_length=30,null=True,blank=True)
-    weekend_from_2 = models.CharField(max_length=30,null=True,blank=True)
-    weekend_to_2 = models.CharField(max_length=30,null=True,blank=True)
+    weekend_from_1 = models.CharField(max_length=30,null=True,blank=True,default=11)
+    weekend_to_1 = models.CharField(max_length=30,null=True,blank=True,default=12)
+    weekend_from_2 = models.CharField(max_length=30,null=True,blank=True,default=11)
+    weekend_to_2 = models.CharField(max_length=30,null=True,blank=True,default=12)
 
     
 

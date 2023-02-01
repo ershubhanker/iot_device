@@ -115,15 +115,15 @@ def index(request):
         if lock.is_valid():
                     # int(lock.cleaned_data['weekday1'])
                 # weekday1 = lock.cleaned_data.get('weekday1')
-                weekday_from_1 = lock.cleaned_data.get('weekday_from_1') if lock.cleaned_data.get('weekday_from_1') else 11
+                weekday_from_1 = lock.cleaned_data['weekday_from_1']
                 weekday_to_1 = lock.cleaned_data.get('weekday_to_1') if lock.cleaned_data.get('weekday_to_1') else 12
-                weekday_from_2 = lock.cleaned_data.get('weekday_from_2') if lock.cleaned_data.get('weekday_from_2') else 11
-                weekday_to_2 = lock.cleaned_data.get('weekday_to_2') if lock.cleaned_data.get('weekday_to_2') else 12
+                weekday_from_2 = lock.cleaned_data['weekday_from_2'] 
+                weekday_to_2 = lock.cleaned_data.get('weekday_to_2') if lock.cleaned_data.get('weekday_to_2')else 12
 
-                weekend_from_1 = lock.cleaned_data.get('weekend_from_1') if lock.cleaned_data.get('weekend_from_1') else 11
-                weekend_to_1 = lock.cleaned_data.get('weekend_to_1') if lock.cleaned_data.get('weekend_to_1') else 12
-                weekend_from_2 = lock.cleaned_data.get('weekend_from_2') if lock.cleaned_data.get('weekend_from_2') else 11
-                weekend_to_2 = lock.cleaned_data.get('weekend_to_2') if lock.cleaned_data.get('weekend_to_2') else 12
+                weekend_from_1 = lock.cleaned_data['weekend_from_1'] 
+                weekend_to_1 = lock.cleaned_data.get('weekend_to_1') if lock.cleaned_data.get('weekend_to_1')else 12
+                weekend_from_2 = lock.cleaned_data['weekend_from_2'] 
+                weekend_to_2 = lock.cleaned_data.get('weekend_to_2') if lock.cleaned_data.get('weekend_to_2')else 12
 
                 
                 if (weekday_from_1>23 or weekday_from_1<0) or (weekday_to_1>23 or weekday_to_1<0) or (weekday_from_2>23 or weekday_from_2<0) or (weekday_to_2>23 or weekday_to_2<0) :
@@ -147,14 +147,18 @@ def index(request):
                 else:
                     t = tou_details.objects.get(id=1)
                     # t = lockoutDetails.objects.filter(id=1).update(**request.data)
-                    t.weekday_from_1 = weekday_from_1
+                    if lock.cleaned_data.get('weekday_from_1'):
+                        t.weekday_from_1 = weekday_from_1
                     t.weekday_to_1 = weekday_to_1
-                    t.weekday_from_2 = weekday_from_2
+                    if lock.cleaned_data.get('weekday_from_2') :
+                        t.weekday_from_2 = weekday_from_2
                     t.weekday_to_2 = weekday_to_2
 
-                    t.weekend_from_1 = weekend_from_1
+                    if lock.cleaned_data.get('weekend_from_1'):
+                        t.weekend_from_1 = weekend_from_1
                     t.weekend_to_1 = weekend_to_1
-                    t.weekend_from_2 = weekend_from_2
+                    if lock.cleaned_data.get('weekend_from_2'):
+                        t.weekend_from_2 = weekend_from_2
                     t.weekend_to_2 = weekend_to_2
 
                     # print('=========data received===========')
