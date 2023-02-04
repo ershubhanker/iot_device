@@ -199,7 +199,7 @@ def index(request):
                     json_dict['tou_hold'] = res
                     json_object = json.dumps(json_dict, indent=4)
                     # Writing to configuration.json
-                    config_file_path = "/etc/varian/evems/config/configuration.py"
+                    config_file_path = "/etc/varian/evems/config"
                     config_dir = os.path.dirname(config_file_path)
 
                     if not os.path.exists(config_dir):
@@ -289,7 +289,7 @@ def index(request):
                 json_object = json.dumps(json_dict, indent=4)
                 
                 # Writing to configuration.json
-                config_file_path = "/etc/varian/evems/config/configuration.py"
+                config_file_path = "/etc/varian/evems/config"
                 config_dir = os.path.dirname(config_file_path)
 
                 if not os.path.exists(config_dir):
