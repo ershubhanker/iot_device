@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+# from .storage import CustomStorage
+
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
@@ -139,3 +141,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
+
+# #------------ the storage path
+# DEFAULT_FILE_STORAGE = 'path.to.CustomStorage'

@@ -5,6 +5,11 @@ from .models import *
 from django.core import serializers
 from django.contrib import messages
 import ast 
+import os
+# from django.core.files.storage import default_storage
+
+# default_storage.save('path/to/json/file', your_file_object)
+
 # https://stackoverflow.com/questions/37840839/get-json-representation-of-django-model
 #
 
@@ -67,9 +72,22 @@ def index(request):
             json_dict['wifi'] = res
             json_object = json.dumps(json_dict, indent=4)
 
+            config_file_path = "/etc/varian/evems/config"
+            config_dir = os.path.dirname(config_file_path)
+
+            if not os.path.exists(config_dir):
+                os.makedirs(config_dir)
+
             # Writing to configuration.json
-            with open("configuration.json", "w") as outfile:
+            with open(config_file_path, "w") as outfile:
                 outfile.write(json_object)
+            #     print('---------gotcha----------')
+
+            # with open(config_file_path, "r") as config_file:
+            #     config_str = config_file.read()
+
+            # json_object = json.loads(config_str)
+            # print(json_object)
             # messages.success(request,'Wi-Fi settings saved')
         # else:
         #     # print(wifi_form['password'].errors)
@@ -102,7 +120,14 @@ def index(request):
                 json_dict['date_time'] = res
                 json_object = json.dumps(json_dict, indent=4)
                 # Writing to configuration.json
-                with open("configuration.json", "w") as outfile:
+                config_file_path = "/etc/varian/evems/config"
+                config_dir = os.path.dirname(config_file_path)
+
+                if not os.path.exists(config_dir):
+                    os.makedirs(config_dir)
+
+            # Writing to configuration.json
+                with open(config_file_path, "w") as outfile:
                     outfile.write(json_object)
                 # print(json_dict)
         else:
@@ -173,7 +198,14 @@ def index(request):
                     json_dict['tou_hold'] = res
                     json_object = json.dumps(json_dict, indent=4)
                     # Writing to configuration.json
-                    with open("configuration.json", "w") as outfile:
+                    config_file_path = "/etc/varian/evems/config"
+                    config_dir = os.path.dirname(config_file_path)
+
+                    if not os.path.exists(config_dir):
+                        os.makedirs(config_dir)
+
+            # Writing to configuration.json
+                    with open(config_file_path, "w") as outfile:
                         outfile.write(json_object)
                     # print(json_dict)
 
@@ -259,7 +291,14 @@ def index(request):
                 json_object = json.dumps(json_dict, indent=4)
                 
                 # Writing to configuration.json
-                with open("configuration.json", "w") as outfile:
+                config_file_path = "/etc/varian/evems/config"
+                config_dir = os.path.dirname(config_file_path)
+
+                if not os.path.exists(config_dir):
+                    os.makedirs(config_dir)
+
+            # Writing to configuration.json
+                with open(config_file_path, "w") as outfile:
                     outfile.write(json_object)
              
     else:
