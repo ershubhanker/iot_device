@@ -3,19 +3,27 @@
     "date_time": "",
     "lockout": "",
     "Electrical Config": "",
-    "tou_hold": [
+    "Electrical": [
         {
-            "model": "myapp.tou_details",
+            "model": "myapp.ecdetails",
             "pk": 1,
             "fields": {
-                "weekday_from_1": "10",
-                "weekday_to_1": "22",
-                "weekday_from_2": "7",
-                "weekday_to_2": "12",
-                "weekend_from_1": "8",
-                "weekend_to_1": "12",
-                "weekend_from_2": "11",
-                "weekend_to_2": "12"
+                "sensed_panel_rating": 58,
+                "sensor_ct_rating": "400",
+                "circuit_breaker_a": "20",
+                "circuit_breaker_b": "0",
+                "c1": "123456786542134",
+                "max_amp1": 10,
+                "c1_circuit": "A",
+                "c2": "",
+                "max_amp2": 12,
+                "c2_circuit": "A",
+                "c3": "",
+                "max_amp3": 12,
+                "c3_circuit": "A",
+                "c4": "",
+                "max_amp4": 12,
+                "c4_circuit": "B"
             }
         }
     ]

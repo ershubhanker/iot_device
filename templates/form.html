@@ -257,7 +257,7 @@
               {% comment %} <select class="form-control"  name="sensed_panel_rating" id="sensed_panel_rating"> {% endcomment %}
                 {% comment %} <option class="form-control"  selected='selected' value="{{ ec.sensed_panel_rating }}">{{ ec.sensed_panel_rating }}</option> {% endcomment %}
                 {% for ec in EC_Details %}
-                <input type="number" min="50" max="400" class="form-control lockout" name="sensed_panel_rating" placeholder="{{ ec.sensed_panel_rating }}">
+                <input type="number" min="50" max="400" class="form-control lockout" name="sensed_panel_rating" value="{{ ec.sensed_panel_rating }}">
                {% endfor %}
               </select>
             </div>
