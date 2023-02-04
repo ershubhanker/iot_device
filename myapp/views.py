@@ -72,7 +72,7 @@ def index(request):
             json_dict['wifi'] = res
             json_object = json.dumps(json_dict, indent=4)
 
-            config_file_path = "/etc/varian/evems/config"
+            config_file_path = "/etc/varian/evems/config/configuration.py"
             config_dir = os.path.dirname(config_file_path)
 
             if not os.path.exists(config_dir):
@@ -122,7 +122,7 @@ def index(request):
                 
                 
                 # Writing to configuration.json
-                config_file_path = "/etc/varian/evems/config"
+                config_file_path = "/etc/varian/evems/config/configuration.py"
                 config_dir = os.path.dirname(config_file_path)
 
                 if not os.path.exists(config_dir):
@@ -199,7 +199,7 @@ def index(request):
                     json_dict['tou_hold'] = res
                     json_object = json.dumps(json_dict, indent=4)
                     # Writing to configuration.json
-                    config_file_path = "/etc/varian/evems/config/"
+                    config_file_path = "/etc/varian/evems/config/configuration.py"
                     config_dir = os.path.dirname(config_file_path)
 
                     if not os.path.exists(config_dir):
@@ -225,25 +225,25 @@ def index(request):
                 cbb = ecform.cleaned_data['circuit_breaker_b']
                 # cbb = ecform.cleaned_data.get('circuit_breaker_b') if ecform.cleaned_data.get('circuit_breaker_b') else 0
                 # _c1 = ecform.cleaned_data['c1']
-                _c1 = ecform.cleaned_data['c1']  
+                _c1 = ecform.cleaned_data.get('c1') if ecform.cleaned_data.get('c1') else ''
                 # _cma1 = ecform.cleaned_data['max_amp1']
                 _cma1 = ecform.cleaned_data.get('max_amp1') if ecform.cleaned_data.get('max_amp1') else 12
                 c1_circuit = ecform.cleaned_data['c1_circuit']
                 # _c1ab = ecform.cleaned_data.get('c1ab') if ecform.cleaned_data.get('c1ab') else 'A'
                 # _c2 = ecform.cleaned_data['c2']
-                _c2 = ecform.cleaned_data['c2'] 
+                _c2 = ecform.cleaned_data.get('c2') if ecform.cleaned_data.get('c2') else ''
                 # _cma2 = ecform.cleaned_data['max_amp2']
                 _cma2 = ecform.cleaned_data.get('max_amp2') if ecform.cleaned_data.get('max_amp2') else 12
                 c2_circuit = ecform.cleaned_data['c2_circuit']
                 # _c2ab = ecform.cleaned_data.get('c2ab') if ecform.cleaned_data.get('c2ab') else 'A'
                 # _c3 = ecform.cleaned_data['c3']
-                _c3 = ecform.cleaned_data['c3'] 
+                _c3 = ecform.cleaned_data.get('c3') if ecform.cleaned_data.get('c3') else ''
                 # _cma3 = ecform.cleaned_data['max_amp3']
                 _cma3 = ecform.cleaned_data.get('max_amp3') if ecform.cleaned_data.get('max_amp3') else 12
                 c3_circuit = ecform.cleaned_data['c3_circuit']
                 # _c3ab = ecform.cleaned_data.get('c3ab') if ecform.cleaned_data.get('c3ab') else 'A'
                 # _c4 = ecform.cleaned_data['c4']
-                _c4 = ecform.cleaned_data['c4'] 
+                _c4 = ecform.cleaned_data.get('c4') if ecform.cleaned_data.get('c4') else ''
                 # _cma4 = ecform.cleaned_data['max_amp4']
                 _cma4 = ecform.cleaned_data.get('max_amp4') if ecform.cleaned_data.get('max_amp4') else 12
                 c4_circuit = ecform.cleaned_data['c4_circuit']
@@ -265,20 +265,17 @@ def index(request):
                     t.sensor_ct_rating = scr
                     t.circuit_breaker_a = cba
                     t.circuit_breaker_b = cbb
-                    if ecform.cleaned_data.get('c1'):
-                        t.c1 = _c1
+                    
+                    t.c1 = _c1
                     t.c1_circuit = c1_circuit
                     t.max_amp1 = _cma1
-                    if ecform.cleaned_data.get('c2'):
-                        t.c2 = _c2
+                    t.c2 = _c2
                     t.c2_circuit = c2_circuit
                     t.max_amp2 = _cma2
-                    if ecform.cleaned_data.get('c3'):
-                        t.c3 = _c3
+                    t.c3 = _c3
                     t.max_amp3 = _cma3
                     t.c3_circuit = c3_circuit
-                    if ecform.cleaned_data.get('c4'):
-                        t.c4 = _c4
+                    t.c4 = _c4
                     t.max_amp4 = _cma4
                     t.c4_circuit = c4_circuit
                     t.save()
@@ -292,7 +289,7 @@ def index(request):
                 json_object = json.dumps(json_dict, indent=4)
                 
                 # Writing to configuration.json
-                config_file_path = "/etc/varian/evems/config"
+                config_file_path = "/etc/varian/evems/config/configuration.py"
                 config_dir = os.path.dirname(config_file_path)
 
                 if not os.path.exists(config_dir):

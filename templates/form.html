@@ -65,13 +65,14 @@
             Wi-Fi
           </button>
         </h5>
-        <div class="para"><p>* The default SSID/password is varian_secure/varian
-          Changes made here must be configured into all EV chargers accessing this Varian Lite controller
-          </p></div>
+        
       </div>
     
       <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
+          <div class="para"><p>* The default SSID/password is varian_secure/varian
+            Changes made here must be configured into all EV chargers accessing this Varian Lite controller
+            </p></div>
           <form action="" method="post">
             {% csrf_token %}
             <!-- SSID -->
@@ -162,12 +163,14 @@
             Time of Use Lockout
           </button>
         </h5>
-        <div class="para"><p>* Enter hours to disallow charging due to time-of-use pricing using the 24-hour clock (eg. 17 for 5 pm).  Charging will be permitted at the start of the “To” hour.</p></div>
       </div>
       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
         <div class="card-body">
+        <div class="para"><p>* Enter hours to disallow charging due to time-of-use pricing using the 24-hour clock (eg. 17 for 5 pm).  Charging will be permitted at the start of the “To” hour.</p></div>
+
           <form action="" method="post">
             {% csrf_token %}
+
             
             <div class="row">
               <div class="col">
@@ -245,10 +248,11 @@
             Electrical 
           </button>
         </h5>
-        <div class="para"><p>* Electrical settings must be made by a qualified electrical contractor. Incorrect settings will result in improper operation and can result in severe damage to the electrical system.</p></div>
       </div>
       <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
         <div class="card-body">
+        <div class="para"><p>* Electrical settings must be made by a qualified electrical contractor. Incorrect settings will result in improper operation and can result in severe damage to the electrical system.</p></div>
+
           <form action="" method="post">
             {% csrf_token %}
            

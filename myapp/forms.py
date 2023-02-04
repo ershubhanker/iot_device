@@ -61,16 +61,16 @@ class LockoutForm(forms.ModelForm):
 
 class EcForm(forms.ModelForm):
     sensed_panel_rating = forms.IntegerField(required=False, initial=100)
-    c1 = forms.IntegerField(required=False,initial=12)
+    c1 = forms.CharField(required=False)
     max_amp1 = forms.IntegerField(required=False,initial=12)
     # c1ab = forms.IntegerField(required=False,initial='A')
-    c2 = forms.IntegerField(required=False,initial=12)
+    c2 = forms.CharField(required=False)
     max_amp2 = forms.IntegerField(required=False,initial=12)
     # c2ab = forms.IntegerField(required=False,initial='A')
-    c3 = forms.IntegerField(required=False,initial=12)
+    c3 = forms.CharField(required=False)
     max_amp3 = forms.IntegerField(required=False,initial=12)
     # c3ab = forms.IntegerField(required=False,initial='A')
-    c4 = forms.IntegerField(required=False,initial=12)
+    c4 = forms.CharField(required=False)
     max_amp4 = forms.IntegerField(required=False,initial=12)
     # c4ab = forms.IntegerField(required=False,initial='A')
     
