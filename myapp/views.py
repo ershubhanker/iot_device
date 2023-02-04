@@ -119,13 +119,14 @@ def index(request):
                 res = ast.literal_eval(val2)
                 json_dict['date_time'] = res
                 json_object = json.dumps(json_dict, indent=4)
+                
+                
                 # Writing to configuration.json
                 config_file_path = "/etc/varian/evems/config"
                 config_dir = os.path.dirname(config_file_path)
 
                 if not os.path.exists(config_dir):
                     os.makedirs(config_dir)
-
             # Writing to configuration.json
                 with open(config_file_path, "w") as outfile:
                     outfile.write(json_object)
@@ -198,7 +199,7 @@ def index(request):
                     json_dict['tou_hold'] = res
                     json_object = json.dumps(json_dict, indent=4)
                     # Writing to configuration.json
-                    config_file_path = "/etc/varian/evems/config"
+                    config_file_path = "/etc/varian/evems/config/"
                     config_dir = os.path.dirname(config_file_path)
 
                     if not os.path.exists(config_dir):
