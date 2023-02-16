@@ -1,16 +1,22 @@
 {
     "wifi": "",
-    "date_time": [
+    "date_time": "",
+    "lockout": "",
+    "Electrical Config": "",
+    "tou_hold": [
         {
-            "model": "myapp.datetimedetails",
+            "model": "myapp.tou_details",
             "pk": 1,
             "fields": {
-                "date": "2023-02-26",
-                "local_time": "20:45:00",
-                "timezone": "-1.0"
+                "weekday_from_1": "25",
+                "weekday_to_1": "14",
+                "weekday_from_2": "0",
+                "weekday_to_2": "0",
+                "weekend_from_1": "0",
+                "weekend_to_1": "0",
+                "weekend_from_2": "0",
+                "weekend_to_2": "0"
             }
         }
-    ],
-    "lockout": "",
-    "Electrical Config": ""
+    ]
 }

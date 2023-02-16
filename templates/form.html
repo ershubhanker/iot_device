@@ -70,7 +70,7 @@
     
       <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
-          <div class="para"><p>* The default SSID/password is varian_secure/varian
+          <div class="para"><p>The default SSID/password is varian_secure/varian.
             Changes made here must be configured into all EV chargers accessing this Varian Lite controller
             </p></div>
           <form action="" method="post">
@@ -78,8 +78,10 @@
             <!-- SSID -->
             <div class="form-group">
               <label for="exampleInputEmail1">SSID</label>
+              {% for wifi in Wifi_Details %}
               <!-- {% for wifi in Wifi_Details %} -->
-              <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" >
+              <input type="text" class="form-control" name="ssid" id="id_ssid" aria-describedby="emailHelp" value="{% if wifi.ssid %}{{ wifi.ssid }}{% else %}{% endif %}">
+              {% endfor %}
               
               <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your ssid with anyone else.</small> -->
             </div>
@@ -122,13 +124,15 @@
             <!-- <input class="form-control" type="time" name="_time"> -->
             <div class="form-group">
               <label for="exampleInputEmail1">Date</label>
-              <input type="date" min="2022-01-01" max="2099-12-31" class="form-control" name="date" placeholder="Enter Date">
+              <input type="date" min="2022-01-01" max="2099-12-31" class="form-control" name="date" placeholder="Enter Date" id="date">
+              <div id="dateError" style="display: none; color: red;"></div>
             </div>
             
             <div class="form-group">  
               <label for="exampleInputPassword1">Time</label>
               <!-- <input type="text" id="timepicker-12-hr" name="timepicker-12-hr" class="form-control timepicker-12-hr"> -->
-              <input type="time" class="form-control" name="local_time" placeholder="Month">
+              <input type="time" class="form-control" name="local_time" placeholder="Month" id="time">
+              <div id="timeError" style="display: none; color: red;"></div>
             </div>
 
 
@@ -136,19 +140,19 @@
               <label for="exampleInputPassword1">Time Zone</label>
               {% comment %} <input type="text" class="form-control" name="timezone" placeholder="Time Zone"> {% endcomment %}
               <select class="form-control"  name="timezone" id="timezone" required>
-                <option class="form-control" disabled='True' selected>-------------Select Time Zone----------------</option>
+                <!-- <option class="form-control" disabled='True' selected>-------------Select Time Zone----------------</option> -->
                 
                 
                 {% for key,value in choice5 %}
                 {% for t in Date_and_Time %}
-                <option class="form-control"  value="{{ key }}" {% if t.timezone == key %}selected{% endif %}>{{ value }}</option>
+                <option class="form-control"  value="{{ key }}" {% if t.timezone == key %}selected{% endif %} id="timezoneSelection">{{ value }}</option>
 
-                      {% comment %} <option class="form-control"  value="{{ key }}">{{ value }}</option> {% endcomment %}
                       {% endfor %}
                       {% endfor %}
               </select>
+              <div id="timezoneError" style="display: none; color: red;"></div>
             </div>
-            <input type="submit" class="btn btn-info" name="datetime">
+            <input type="submit" class="btn btn-info" name="datetime"  onclick="return validateForm()">
           </form>
         </div>
       </div>
@@ -160,13 +164,13 @@
       <div class="card-header" id="headingThree">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Time of Use Lockout
+            Time-of-Use Hold
           </button>
         </h5>
       </div>
       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
         <div class="card-body">
-        <div class="para"><p>* Enter hours to disallow charging due to time-of-use pricing using the 24-hour clock (eg. 17 for 5 pm).  Charging will be permitted at the start of the “To” hour.</p></div>
+        <div class="para"><p>Enter hours to disallow charging due to time-of-use pricing using the 24-hour clock (eg. 17 for 5 pm).  Charging will be permitted at the start of the “To” hour.</p></div>
 
           <form action="" method="post">
             {% csrf_token %}
@@ -177,13 +181,15 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
                   {% for lockout in lockout_Details %}
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp" value="{{ lockout.weekday_from_1 }}">
+                  <input type="number" id="weekdayFrom1" class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp" title='Value must be between 0 and 23' value="{{ lockout.weekday_from_1 }}">
+                  <div id="weekdayError1" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_1" value="{{ lockout.weekday_to_1 }}">
+                  <input type="number" id="weekdayTo1" class="form-control lockout" name="weekday_to_1" value="{{ lockout.weekday_to_1 }}">
+                  <div id="weekdayError2" style="display: none; color: red;"></div>
                 </div>
               </div>
             </div>
@@ -191,13 +197,15 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}">
+                  <input type="number" id="weekdayFrom2" class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}">
+                  <div id="weekdayError3" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}">
+                  <input type="number" id="weekdayTo2" class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}">
+                  <div id="weekdayError4" style="display: none; color: red;"></div>
                 </div>
               </div>
             </div>
@@ -206,13 +214,15 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend From</label>
-                  <input type="number" min='0' max='23' class="form-control lockout" name="weekend_from_1"  value="{{ lockout.weekend_from_1 }}">
+                  <input type="number" id="weekendFrom1" class="form-control lockout" name="weekend_from_1"  value="{{ lockout.weekend_from_1 }}">
+                  <div id="weekendError1" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend To</label>
-                  <input type="number" class="form-control lockout" name="weekend_to_1" value="{{ lockout.weekend_to_1 }}">
+                  <input type="number" id="weekendTo1" class="form-control lockout" name="weekend_to_1" value="{{ lockout.weekend_to_1 }}">
+                  <div id="weekendError2" style="display: none; color: red;"></div>
                 </div>
               </div>
             </div>
@@ -220,19 +230,22 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend From</label>
-                  <input type="number" class="form-control lockout" name="weekend_from_2"  value="{{ lockout.weekend_from_2 }}">
+                  <input type="number" id="weekendFrom2" class="form-control lockout" name="weekend_from_2"  value="{{ lockout.weekend_from_2 }}">
+                  <div id="weekendError3" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend To</label>
-                  <input type="number" class="form-control lockout" name="weekend_from_2" value="{{ lockout.weekend_from_2 }}">
+                  <input type="number" id="weekendTo2"class="form-control lockout" name="weekend_from_2" value="{{ lockout.weekend_from_2 }}">
+                  <div id="weekendError4" style="display: none; color: red;"></div>
+
                   {% endfor %}
                 </div>
               </div>
             </div>
 
-            <input type="submit" class="btn btn-info" name="lockout">
+            <input type="submit" class="btn btn-info" name="lockout" onclick="return week()">
 
           </form>
         </div>
@@ -251,17 +264,16 @@
       </div>
       <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
         <div class="card-body">
-        <div class="para"><p>* Electrical settings must be made by a qualified electrical contractor. Incorrect settings will result in improper operation and can result in severe damage to the electrical system.</p></div>
+        <div class="para"><p>Electrical settings must be made by a qualified electrical contractor. Incorrect settings will result in improper operation and can result in severe damage to the electrical system.</p></div>
 
-          <form action="" method="post">
+          <form action="" method="post" >
             {% csrf_token %}
            
             <div class="form-group">
               <label for="exampleInputPassword1">Sensed Panel Rating</label>
-              {% comment %} <select class="form-control"  name="sensed_panel_rating" id="sensed_panel_rating"> {% endcomment %}
-                {% comment %} <option class="form-control"  selected='selected' value="{{ ec.sensed_panel_rating }}">{{ ec.sensed_panel_rating }}</option> {% endcomment %}
                 {% for ec in EC_Details %}
-                <input type="number" min="50" max="400" class="form-control lockout" name="sensed_panel_rating" value="{{ ec.sensed_panel_rating }}">
+                <input type="number" class="form-control lockout" name="sensed_panel_rating" value="{{ ec.sensed_panel_rating }}" id="rating">
+                <div id="ratingError" style="display: none; color: red;"></div>
                {% endfor %}
               </select>
             </div>
@@ -313,7 +325,9 @@
                   <div class="form-group">
                     <label for="exampleInputEmail1" class='chargerId'>Charger ID 1</label>
                     {% for ec in EC_Details %}
-                    <input type="text" class="form-control mobile" name="c1" aria-describedby="emailHelp" id='chargerId' placeholder="{{ ec.c1 }}">
+                    <input type="text" class="form-control mobile" name="c1" aria-describedby="emailHelp" maxlength="16" id='chargerId' value="{% if ec.c1 %}{{ ec.c1 }}{% else %}{% endif %}">
+                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
+
                   </div>
                 </div>
               </div>
@@ -323,14 +337,15 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile"  min="8" max="80" name="max_amp1" aria-describedby="emailHelp" value="{{ ec.max_amp1 }}">
+                    <input type="number" class="form-control mobile" id="maxAmp" name="max_amp1" aria-describedby="emailHelp" value="{{ ec.max_amp1 }}">
+                    <div id="ampError" style="display: none; color: red;"></div>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c1_circuit" id="cab">
+                    <select class="form-control"  name="c1_circuit" id="cab1">
                       {% for key,value in choice2 %}
                 
                       {% for ec in EC_Details %}
@@ -340,7 +355,7 @@
                       {% endfor %}
                       
                     </select>
-                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
+                    <div id="selectError1" style="display: none; color: red;"></div>
                   </div>
                 </div>
               </div>
@@ -349,7 +364,9 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1" class='chargerId'>Charger ID 2</label>
-                    <input type="text" class="form-control mobile" name="c2" aria-describedby="emailHelp" id='chargerId' placeholder="{{ ec.c2 }}">
+                    <input type="text" class="form-control mobile" name="c2" aria-describedby="emailHelp" maxlength="16" id='chargerId2' value="{% if ec.c2 %}{{ ec.c2 }}{% else %}{% endif %}">
+                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
+
                   </div>
                 </div>
                 
@@ -360,14 +377,15 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp2"  min="8" max="80" aria-describedby="emailHelp" value="{{ ec.max_amp2 }}">
+                    <input type="number" class="form-control mobile" id="maxAmp2" name="max_amp2" aria-describedby="emailHelp" value="{{ ec.max_amp2 }}">
+                    <div id="ampError2" style="display: none; color: red;"></div>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c2_circuit" id="cab"">
+                    <select class="form-control"  name="c2_circuit" id="cab2">
                 
                       {% for key,value in choice2 %}
                 
@@ -377,8 +395,9 @@
                 {% endfor %}
                       {% endfor %}
                     </select>
-                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
+                    <div id="selectError2" style="display: none; color: red;"></div>
                   </div>
+                  
                 </div>
               </div>
               <hr>
@@ -386,7 +405,9 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1" class='chargerId'>Charger ID 3</label>
-                    <input type="text" class="form-control mobile" name="c3" aria-describedby="emailHelp" id='chargerId' placeholder="{{ ec.c3 }}">
+                    <input type="text" class="form-control mobile" name="c3" aria-describedby="emailHelp" maxlength="16" id='chargerId3' value="{% if ec.c3 %}{{ ec.c3 }}{% else %}{% endif %}">
+                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
+
                   </div>
                 </div>
                 
@@ -397,14 +418,15 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp3"  min="8" max="80" aria-describedby="emailHelp" value="{{ ec.max_amp3 }}">
+                    <input type="number" class="form-control mobile" name="max_amp3" id="maxAmp3" aria-describedby="emailHelp" value="{{ ec.max_amp3 }}">
+                    <div id="ampError3" style="display: none; color: red;"></div>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c3_circuit" id="cab">
+                    <select class="form-control"  name="c3_circuit" id="cab3">
                 
                       {% for key,value in choice2 %}
                 
@@ -415,8 +437,8 @@
                       {% endfor %}
                       
                     </select>
-                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
                   </div>
+                  <div id="selectError3" style="display: none; color: red;"></div>
                 </div>
               </div>
               <hr>
@@ -425,7 +447,8 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="exampleInputEmail1" >Charger ID 4</label>
-                    <input type="text" class="form-control mobile" name="c4" id='chargerId' aria-describedby="emailHelp" placeholder="{{ ec.c4 }}">
+                    <input type="text" class="form-control mobile" name="c4" id='chargerId4' aria-describedby="emailHelp" maxlength="16" value="{% if ec.c4 %}{{ ec.c4 }}{% else %}{% endif %}">
+                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
                   </div>
                 </div>                
               </div>
@@ -434,7 +457,8 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Max Amp</label>
-                    <input type="number" class="form-control mobile" name="max_amp4"  min="8" max="80" aria-describedby="emailHelp" value="{{ ec.max_amp4 }}">
+                    <input type="number" class="form-control mobile" name="max_amp4" id="maxAmp4" aria-describedby="emailHelp" value="{{ ec.max_amp4 }}">
+                    <div id="ampError4" style="display: none; color: red;"></div>
                     {% endfor %}
                   </div>
                 </div>
@@ -442,7 +466,7 @@
                   <div class="form-group">  
                     <label for="exampleInputPassword1">Circuit</label>
                     <!-- <input type="text" class="form-control" name="c1ab" placeholder="Circuit A/B"> -->
-                    <select class="form-control"  name="c4_circuit" id="cab">
+                    <select class="form-control"  name="c4_circuit" id="cab4">
                 
                       {% for key,value in choice2 %}
                 
@@ -453,12 +477,13 @@
                       {% endfor %}
                       
                     </select>
-                    <p id="error-message" style="display: none; color:red;">Circuit must be A when Circuit Breaker B is 0</p>
+                    
                   </div>
+                  <div id="selectError4" style="display: none; color: red;"></div>
                 </div>
               </div>
 
-            <input type="submit" class="btn btn-info" name="ec">
+            <input type="submit" class="btn btn-info" name="ec" onclick="return ecform()">
           </form>
         </div>
       </div>
@@ -480,6 +505,7 @@ function validate() {
   var password = document.getElementById("password").value;
   var confirm_password = document.getElementById("confirm_password").value;
   var error_message = document.getElementById("error_message");
+  
 
   if (password.length < 8) {
     error_message.innerHTML = "Password must be at least 8 characters long";
@@ -493,30 +519,235 @@ function validate() {
     return false;
   }
 
+  
+
+  return true;
+}
+
+// ----------------------------------logic for weekdays-----------------------
+function week(){
+var weekendFrom1 = document.getElementById('weekendFrom1').value 
+var weekendTo1 = document.getElementById('weekendTo1').value
+var weekendFrom2 = document.getElementById('weekendFrom2').value
+var weekendTo2 = document.getElementById('weekendTo2').value
+var weekdayFrom1 = document.getElementById('weekdayFrom1').value 
+var weekdayTo1  = document.getElementById('weekdayTo1').value
+var weekdayFrom2  = document.getElementById('weekdayFrom2').value
+var weekdayTo2= document.getElementById('weekdayTo2').value
+
+if((weekdayFrom1==0 && weekdayTo1==0) || (weekdayFrom2==0 && weekdayTo2==0) || (weekendFrom1==0 && weekendTo1==0) || (weekendFrom2 == 0 && weekendTo2 == 0)){
+  return true;
+}
+// ----------weekday1------------
+
+
+
+if((weekdayFrom1 > weekdayTo1) || (weekdayFrom1 === weekdayTo1)){
+  document.getElementById('weekdayError2').innerHTML = 'From value must be less than To value';
+  document.getElementById("weekdayError2").style.display = "block";
+  return false;}
+  
+if(weekdayFrom1<=0 || weekdayFrom1>23){
+  document.getElementById('weekdayError1').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekdayError1").style.display = "block";
+  return false;}
+
+if(weekdayTo1<=0 || weekdayTo1>23){document.getElementById('weekdayError2').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekdayError2").style.display = "block";
+  return false;}
+
+
+
+  // --------------------weekday2-------------------
+if(weekdayFrom2<=0 || weekdayFrom2>23){document.getElementById('weekdayError3').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekdayError3").style.display = "block";
+  return false;}
+
+if(weekdayTo2<=0 || weekdayTo2>23){document.getElementById('weekdayError4').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekdayError4").style.display = "block";
+  return false;}
+
+// if(weekdayFrom2 === weekdayTo2){
+//   document.getElementById('weekdayError4').innerHTML = 'From value must be less than To value';
+//   document.getElementById("weekdayError4").style.display = "block";
+//   return false;}
+
+if((weekdayFrom2 > weekdayTo2) || (weekdayFrom2 === weekdayTo2)) {
+  document.getElementById('weekdayError4').innerHTML = 'From value must be less than To value';
+  document.getElementById("weekdayError4").style.display = "block";
+  return false;}
+
+
+// ------------------weekend1------------------
+if(weekendFrom1<=0 || weekendFrom1>23){
+  document.getElementById('weekendError1').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekendError1").style.display = "block";
+  return false;
+}
+if(weekendTo1<=0 || weekendTo1>23){document.getElementById('weekendError2').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekendError2").style.display = "block";
+  return false;}
+
+// if(weekendFrom1 > weekendTo1){document.getElementById('weekendError1').innerHTML = 'From value must be less than To value';
+//   document.getElementById("weekendError1").style.display = "block";
+//   return false;}
+
+// ---------------weekend2------------
+
+if(weekendFrom2<=0 || weekendFrom2>23){document.getElementById('weekendError3').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekendError3").style.display = "block";
+  return false;}
+
+if(weekendTo2<=0 || weekendTo2>23){document.getElementById('weekendError4').innerHTML = 'Value must be between 0 and 23';
+  document.getElementById("weekendError4").style.display = "block";
+  return false;}
+
+if((weekendFrom2 > weekendTo2) || (weekendFrom2 === weekendTo2)){document.getElementById('weekendError4').innerHTML = 'From value must be less than To value';
+  document.getElementById("weekendError4").style.display = "block";
+  return false;}
+
+
+
+
+return true;
+}
+
+//        
+
+
+// ----------------------------------------------------------------------------------------------------------------
+// -----------------------------------logic for ec errors-------------------
+function ecform(){
+  var elt = document.getElementById("rating").value;
+  var maxAmp = document.getElementById("maxAmp").value;
+  var maxAmp2 = document.getElementById("maxAmp2").value;
+  var maxAmp3 = document.getElementById("maxAmp3").value;
+  var maxAmp4 = document.getElementById("maxAmp4").value;
+  var cab = document.getElementById("circuit_breaker_b").value;
+
+
+
+
+
+  if(elt<50 || elt>400){
+    document.getElementById("ratingError").innerHTML = "Value must be between 50 and 400";
+    document.getElementById("ratingError").style.display = "block";
+    return false;
+  }
+
+  if(cab === "0"){
+    if(document.getElementById("cab1").value == "B"){
+      document.getElementById("selectError1").innerHTML = "Circuit must be A when Circuit Breaker B is 0"
+      document.getElementById("selectError1").style.display = "block";
+      return false;
+    }
+    if(document.getElementById("cab2").value == "B"){
+      document.getElementById("selectError2").innerHTML = "Circuit must be A when Circuit Breaker B is 0"
+      document.getElementById("selectError2").style.display = "block";
+      return false;
+    }
+    if(document.getElementById("cab3").value == "B"){
+      document.getElementById("selectError3").innerHTML = "Circuit must be A when Circuit Breaker B is 0"
+      document.getElementById("selectError3").style.display = "block";
+      return false;
+    }
+    if(document.getElementById("cab4").value == "B"){
+      document.getElementById("selectError4").innerHTML = "Circuit must be A when Circuit Breaker B is 0"
+      document.getElementById("selectError4").style.display = "block";
+      return false;
+    }
+
+  }
+
+  if(maxAmp < 8 || maxAmp >80 ){
+    document.getElementById("ampError").innerHTML = "Value must be between 8 and 80";
+    document.getElementById("ampError").style.display = "block";
+    return false;
+  }
+
+  if(document.getElementById("chargerId2").value != false){
+    // if(maxAmp2 === 0){ return true;}
+    if(maxAmp2 < 8 || maxAmp2 >80 ){
+    document.getElementById("ampError2").innerHTML = "Value must be between 8 and 80";
+    document.getElementById("ampError2").style.display = "block";
+    return false;
+  }}
+
+  if(document.getElementById("chargerId3").value != false){
+    // if(maxAmp2 === 0){ return true;}
+    if(maxAmp3 < 8 || maxAmp3 >80 ){
+    document.getElementById("ampError3").innerHTML = "Value must be between 8 and 80";
+    document.getElementById("ampError3").style.display = "block";
+    return false;
+  }}
+
+  if(document.getElementById("chargerId4").value != false){
+    // if(maxAmp2 === 0){ return true;}
+    if(maxAmp4 < 8 || maxAmp4 >80 ){
+    document.getElementById("ampError4").innerHTML = "Value must be between 8 and 80";
+    document.getElementById("ampError4").style.display = "block";
+    return false;
+  }}
+  
   return true;
 }
 
 
-// ---------------------------logic for cab----------------------
-const field1 = document.querySelector("#circuit_breaker_b");
-const field2 = document.querySelectorAll("#cab");
-const errorMessage = document.querySelector("#error-message");
+// -------------------------------------logic of time and Date----------------------
+function validateForm() {
+  var date = document.getElementById("date").value;
+  var time = document.getElementById("time").value;
+  var timezone = document.getElementById("timezone").value;
+  var isValid = true;
+  var tz = document.getElementById("timezone").value;
 
-field1.addEventListener("change", function() {
-  if (field1.value === "0") {
-    field2.forEach(function(element) {
-      element.options[1].disabled = true;
-      
-    }
-    );
-    errorMessage.style.display = "block";
+  if (date === "") {
+    document.getElementById("dateError").style.display = "block";
+    document.getElementById("dateError").innerHTML = "Set Date";
+
+    isValid = false;
   } else {
-    field2.forEach(function(element) {
-      element.options[1].disabled = false;
-    });
-    errorMessage.style.display = "none";
-    }
-});
+    document.getElementById("dateError").style.display = "none";
+  }
+
+  if (time === "") {
+    document.getElementById("timeError").style.display = "block";
+    document.getElementById("timeError").innerHTML = "Set Time";
+
+    isValid = false;
+  } else {
+    document.getElementById("timeError").style.display = "none";
+  }
+  if(tz === '1234'){
+    document.getElementById("timezoneError").innerHTML = "Time Zone must be selected";
+    document.getElementById("timezoneError").style.display = "block";
+    return false;
+  }
+  
+
+  return isValid;
+}
+
+// ---------------------------logic for cab----------------------
+// const field1 = document.querySelector("#circuit_breaker_b");
+// const field2 = document.querySelectorAll("#cab");
+// const errorMessage = document.querySelector("#error-message");
+
+// field1.addEventListener("change", function() {
+//   if (field1.value === "0") {
+//     field2.forEach(function(element) {
+//       element.options[1].disabled = true;
+      
+//     }
+//     );
+//     errorMessage.style.display = "block";
+//   } else {
+//     field2.forEach(function(element) {
+//       element.options[1].disabled = false;
+//     });
+//     errorMessage.style.display = "none";
+//     }
+// });
 </script>
 
 </body>

@@ -45,19 +45,21 @@ circuit_breaker2 = (
 
 # https://www.djangosnippets.org/snippets/2703/
 TIME_ZONE_CHOICES = (
+    ('1234','-------------Select Time Zone----------------'),
      ('-12.0', '(UTC -12:00) Eniwetok, Kwajalein'),
      ('-11.0', '(UTC -11:00) Midway Island, Samoa'),
      ('-10.0', '(UTC -10:00) Hawaii'),
      ('-9.0', '(UTC -09:00) Alaska'),
-     ('-8.0', '(UTC -08:00) Pacific Time (US &amp; Canada)'),
-     ('-7.0', '(UTC -07:00) Mountain Time (US &amp; Canada)'),
-     ('-6.0', '(UTC -06:00) Central Time (US &amp; Canada), Mexico City'),
-     ('-5.0', '(UTC -05:00) Eastern Time (US &amp; Canada), Bogota, Lima'),
+     ('-8.0', '(UTC -08:00) Pacific Time (US, Canada)'),
+     ('-7.0', '(UTC -07:00) Mountain Time (US, Canada)'),
+     ('-6.0', '(UTC -06:00) Central Time (US, Canada), Mexico City'),
+     ('-5.0', '(UTC -05:00) Eastern Time (US, Canada), Bogota, Lima'),
      ('-4.0', '(UTC -04:00) Atlantic Time (Canada), Caracas, La Paz'),
      ('-3.5', '(UTC -03:30) Newfoundland'),
      ('-3.0', '(UTC -03:00) Brazil, Buenos Aires, Georgetown'),
      ('-2.0', '(UTC -02:00) Mid-Atlantic'),
      ('-1.0', '(UTC -01:00 hour) Azores, Cape Verde Islands'),
+     ('0.0', '(UTC) London, Lisbon, Casablanca'),
      ('1.0', '(UTC +01:00 hour) Brussels, Copenhagen, Madrid, Paris'),
      ('2.0', '(UTC +02:00) Kaliningrad, South Africa'),
      ('3.0', '(UTC +03:00) Baghdad, Riyadh, Moscow, St. Petersburg'),
@@ -78,49 +80,49 @@ TIME_ZONE_CHOICES = (
 )
 
 class WifiDetails(models.Model):
-    ssid = models.CharField(max_length=30,null=True, blank=True,default='varian_secure')
-    password = models.CharField(max_length=30,null=True, blank=True, default='varian')
+    ssid = models.CharField(max_length=30,null=True, blank=True,default='')
+    password = models.CharField(max_length=30,null=True, blank=True, default='')
     
 
 
 class DateTimeDetails(models.Model):
-    date = models.DateField(null=True, editable=True)
-    local_time = models.TimeField(null=True, editable=True)
+    date = models.DateField(null=True, editable=True,blank=True)
+    local_time = models.TimeField(null=True, editable=True,blank=True)
     # am_pm = models.CharField(max_length=30,choices = time_stamp,default='AM')
-    timezone = models.CharField(max_length=30,choices=TIME_ZONE_CHOICES)
+    timezone = models.CharField(max_length=30,choices=TIME_ZONE_CHOICES,default='1234')
     
 
 
 class tou_details(models.Model):
-    weekday_from_1 = models.CharField(max_length=30,null=True,blank=True,default=11)
-    weekday_to_1 = models.CharField(max_length=30,null=True,blank=True,default=12)
-    weekday_from_2 = models.CharField(max_length=30,null=True,blank=True,default=11)
-    weekday_to_2 = models.CharField(max_length=30,null=True,blank=True,default=12)
+    weekday_from_1 = models.CharField(max_length=30,null=True,blank=True,default=0)
+    weekday_to_1 = models.CharField(max_length=30,null=True,blank=True,default=0)
+    weekday_from_2 = models.CharField(max_length=30,null=True,blank=True,default=0)
+    weekday_to_2 = models.CharField(max_length=30,null=True,blank=True,default=0)
 
-    weekend_from_1 = models.CharField(max_length=30,null=True,blank=True,default=11)
-    weekend_to_1 = models.CharField(max_length=30,null=True,blank=True,default=12)
-    weekend_from_2 = models.CharField(max_length=30,null=True,blank=True,default=11)
-    weekend_to_2 = models.CharField(max_length=30,null=True,blank=True,default=12)
+    weekend_from_1 = models.CharField(max_length=30,null=True,blank=True,default=0)
+    weekend_to_1 = models.CharField(max_length=30,null=True,blank=True,default=0)
+    weekend_from_2 = models.CharField(max_length=30,null=True,blank=True,default=0)
+    weekend_to_2 = models.CharField(max_length=30,null=True,blank=True,default=0)
 
     
 
 class ECDetails(models.Model):
     id = models.AutoField(primary_key=True)
-    sensed_panel_rating = models.IntegerField(null=True, blank=True,default=100)
+    sensed_panel_rating = models.IntegerField(null=True, blank=True,default='100')
     sensor_ct_rating = models.CharField(max_length=30,choices = sensed_panel_rating_choice,default='200')
     circuit_breaker_a = models.CharField(max_length=30,choices = circuit_breaker,default='40')
     circuit_breaker_b = models.CharField(max_length=30,choices = circuit_breaker2,default='0')
 
-    c1 = models.CharField(max_length=30,null=True, default='')
+    c1 = models.CharField(max_length=30,null=True,blank=True, default=' ')
     max_amp1 = models.IntegerField(null=True,default=0)
     c1_circuit = models.CharField(max_length=30,choices = channel,default='A')
-    c2 = models.CharField(max_length=30,null=True,default='')
+    c2 = models.CharField(max_length=30,null=True,default='',blank=True)
     max_amp2 = models.IntegerField(null=True,default=0)
     c2_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
-    c3 = models.CharField(max_length=30,null=True,default='')
+    c3 = models.CharField(max_length=30,null=True,default='',blank=True)
     max_amp3 = models.IntegerField(null=True,default=0)
     c3_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
-    c4 = models.CharField(max_length=30,null=True,default='')
+    c4 = models.CharField(max_length=30,null=True,default='',blank=True)
     max_amp4 = models.IntegerField(null=True,default=0)
     c4_circuit = models.CharField(max_length=30,null=True,choices = channel,default='A')
     

@@ -71,8 +71,9 @@ def index(request):
             res = ast.literal_eval(val1)
             json_dict['wifi'] = res
             json_object = json.dumps(json_dict, indent=4)
-
+        # ---------------------------------------------------------------------------------------
             config_file_path = "/etc/varian/evems/config/configuration.json"
+            # config_file_path = 'configuration.json'
             config_dir = os.path.dirname(config_file_path)
 
             if not os.path.exists(config_dir):
@@ -81,6 +82,7 @@ def index(request):
             # Writing to configuration.json
             with open(config_file_path, "w") as outfile:
                 outfile.write(json_object)
+        # --------------------------------------------------------
             #     print('---------gotcha----------')
 
             # with open(config_file_path, "r") as config_file:
@@ -123,6 +125,7 @@ def index(request):
                 
                 # Writing to configuration.json
                 config_file_path = "/etc/varian/evems/config/configuration.json"
+                # config_file_path = 'configuration.json'
                 config_dir = os.path.dirname(config_file_path)
 
                 if not os.path.exists(config_dir):
@@ -131,8 +134,8 @@ def index(request):
                 with open(config_file_path, "w") as outfile:
                     outfile.write(json_object)
                 # print(json_dict)
-        else:
-            messages.error(request,'Make sure select every field')
+        # else:
+        #     messages.error(request,'Make sure select every field')
 
 
     #----------------lockoutDetails---------------------------      
@@ -142,28 +145,28 @@ def index(request):
                     # int(lock.cleaned_data['weekday1'])
                 # weekday1 = lock.cleaned_data.get('weekday1')
                 weekday_from_1 = lock.cleaned_data['weekday_from_1']
-                weekday_to_1 = lock.cleaned_data.get('weekday_to_1') if lock.cleaned_data.get('weekday_to_1') else 12
+                weekday_to_1 = lock.cleaned_data.get('weekday_to_1') if lock.cleaned_data.get('weekday_to_1') else 0
                 weekday_from_2 = lock.cleaned_data['weekday_from_2'] 
-                weekday_to_2 = lock.cleaned_data.get('weekday_to_2') if lock.cleaned_data.get('weekday_to_2')else 12
+                weekday_to_2 = lock.cleaned_data.get('weekday_to_2') if lock.cleaned_data.get('weekday_to_2')else 0
 
                 weekend_from_1 = lock.cleaned_data['weekend_from_1'] 
-                weekend_to_1 = lock.cleaned_data.get('weekend_to_1') if lock.cleaned_data.get('weekend_to_1')else 12
+                weekend_to_1 = lock.cleaned_data.get('weekend_to_1') if lock.cleaned_data.get('weekend_to_1')else 0
                 weekend_from_2 = lock.cleaned_data['weekend_from_2'] 
-                weekend_to_2 = lock.cleaned_data.get('weekend_to_2') if lock.cleaned_data.get('weekend_to_2')else 12
+                weekend_to_2 = lock.cleaned_data.get('weekend_to_2') if lock.cleaned_data.get('weekend_to_2')else 0
 
                 
-                if (weekday_from_1>23 or weekday_from_1<0) or (weekday_to_1>23 or weekday_to_1<0) or (weekday_from_2>23 or weekday_from_2<0) or (weekday_to_2>23 or weekday_to_2<0) :
-                    messages.error(request,'Values must be between 0 and 23')
-                    return redirect('/')
+                # if (weekday_from_1>23 or weekday_from_1<=0) or (weekday_to_1>23 or weekday_to_1<=0) or (weekday_from_2>23 or weekday_from_2<=0) or (weekday_to_2>23 or weekday_to_2<=0) :
+                #     messages.error(request,'Values must be between 0 and 23')
+                #     return redirect('/')
 
-                elif (weekend_from_1>23 or weekend_from_1<0) or (weekend_to_1>23 or weekend_to_1<0) or (weekend_from_2>23 or weekend_from_2<0) or (weekend_to_2>23 or weekend_to_2<0):
-                    messages.error(request,'Values must be between 0 and 23')
-                    return redirect('/')
+                # elif (weekend_from_1>23 or weekend_from_1<0) or (weekend_to_1>23 or weekend_to_1<0) or (weekend_from_2>23 or weekend_from_2<0) or (weekend_to_2>23 or weekend_to_2<0):
+                #     messages.error(request,'Values must be between 0 and 23')
+                #     return redirect('/')
 
-                elif weekday_from_1>weekday_to_1 or weekday_from_2>weekday_to_2:
-                    messages.error(request,'From value must be less than To value')
-                    return redirect('/')
-                elif weekend_from_1>weekend_to_1 or weekend_from_2>weekend_to_2:
+                # if weekday_from_1>weekday_to_1 or weekday_from_2>weekday_to_2:
+                #     messages.error(request,'From value must be less than To value')
+                #     return redirect('/')
+                if weekend_from_2>weekend_to_2:
                     messages.error(request,'From value must be less than To value')
                     return redirect('/')
                 # elif weekend1.isnumeric()>23 or weekend1<0 weekend1>23 or weekend1<0:
@@ -200,6 +203,7 @@ def index(request):
                     json_object = json.dumps(json_dict, indent=4)
                     # Writing to configuration.json
                     config_file_path = "/etc/varian/evems/config/configuration.json"
+                    # config_file_path = 'configuration.json'
                     config_dir = os.path.dirname(config_file_path)
 
                     if not os.path.exists(config_dir):
@@ -233,23 +237,23 @@ def index(request):
                 # _c2 = ecform.cleaned_data['c2']
                 _c2 = ecform.cleaned_data.get('c2') if ecform.cleaned_data.get('c2') else ''
                 # _cma2 = ecform.cleaned_data['max_amp2']
-                _cma2 = ecform.cleaned_data.get('max_amp2') if ecform.cleaned_data.get('max_amp2') else 12
+                _cma2 = ecform.cleaned_data.get('max_amp2') if ecform.cleaned_data.get('max_amp2') else 0
                 c2_circuit = ecform.cleaned_data['c2_circuit']
                 # _c2ab = ecform.cleaned_data.get('c2ab') if ecform.cleaned_data.get('c2ab') else 'A'
                 # _c3 = ecform.cleaned_data['c3']
                 _c3 = ecform.cleaned_data.get('c3') if ecform.cleaned_data.get('c3') else ''
                 # _cma3 = ecform.cleaned_data['max_amp3']
-                _cma3 = ecform.cleaned_data.get('max_amp3') if ecform.cleaned_data.get('max_amp3') else 12
+                _cma3 = ecform.cleaned_data.get('max_amp3') if ecform.cleaned_data.get('max_amp3') else 0
                 c3_circuit = ecform.cleaned_data['c3_circuit']
                 # _c3ab = ecform.cleaned_data.get('c3ab') if ecform.cleaned_data.get('c3ab') else 'A'
                 # _c4 = ecform.cleaned_data['c4']
                 _c4 = ecform.cleaned_data.get('c4') if ecform.cleaned_data.get('c4') else ''
                 # _cma4 = ecform.cleaned_data['max_amp4']
-                _cma4 = ecform.cleaned_data.get('max_amp4') if ecform.cleaned_data.get('max_amp4') else 12
+                _cma4 = ecform.cleaned_data.get('max_amp4') if ecform.cleaned_data.get('max_amp4') else 0
                 c4_circuit = ecform.cleaned_data['c4_circuit']
                 # _c4ab = ecform.cleaned_data.get('c4ab') if ecform.cleaned_data.get('c4ab') else 'A'
 
-                if _cma1>80 or _cma1<8 or _cma2>80 or _cma2<8 or _cma3>80 or _cma3<8 or _cma4>80 or _cma4<8:
+                if _cma1>80 or _cma1<8:
 
                     messages.error(request,'Value must be between 8 and 80')
                     return redirect('/')
@@ -283,13 +287,14 @@ def index(request):
 
                 val4 = serializers.serialize("json", ECDetails.objects.all())
                 res = ast.literal_eval(val4)
-                json_dict['Electrical'] = res
+                json_dict['electrical'] = res
                 
                 # Serializing json
                 json_object = json.dumps(json_dict, indent=4)
                 
                 # Writing to configuration.json
                 config_file_path = "/etc/varian/evems/config/configuration.json"
+                
                 config_dir = os.path.dirname(config_file_path)
 
                 if not os.path.exists(config_dir):

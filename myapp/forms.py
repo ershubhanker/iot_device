@@ -43,15 +43,15 @@ class DateTimeForm(ModelForm):
         
 
 class LockoutForm(forms.ModelForm):
-    weekday_from_1 = forms.IntegerField(required=False,initial=10)
-    weekday_to_1 = forms.IntegerField(required=False,initial=12)
-    weekday_from_2 = forms.IntegerField(required=False,initial=10)
-    weekday_to_2 = forms.IntegerField(required=False,initial=12)
+    weekday_from_1 = forms.IntegerField(required=False,initial=0)
+    weekday_to_1 = forms.IntegerField(required=False,initial=0)
+    weekday_from_2 = forms.IntegerField(required=False,initial=0)
+    weekday_to_2 = forms.IntegerField(required=False,initial=0)
 
-    weekend_from_1 = forms.IntegerField(required=False,initial=10)
-    weekend_to_1 = forms.IntegerField(required=False,initial=12)
-    weekend_from_2 = forms.IntegerField(required=False,initial=10)
-    weekend_to_2 = forms.IntegerField(required=False,initial=12)
+    weekend_from_1 = forms.IntegerField(required=False,initial=0)
+    weekend_to_1 = forms.IntegerField(required=False,initial=0)
+    weekend_from_2 = forms.IntegerField(required=False,initial=0)
+    weekend_to_2 = forms.IntegerField(required=False,initial=0)
 
 
     class Meta:
@@ -62,16 +62,16 @@ class LockoutForm(forms.ModelForm):
 class EcForm(forms.ModelForm):
     sensed_panel_rating = forms.IntegerField(required=False, initial=100)
     c1 = forms.CharField(required=False)
-    max_amp1 = forms.IntegerField(required=False,initial=12)
+    max_amp1 = forms.IntegerField(required=False,initial=0)
     # c1ab = forms.IntegerField(required=False,initial='A')
     c2 = forms.CharField(required=False)
-    max_amp2 = forms.IntegerField(required=False,initial=12)
+    max_amp2 = forms.IntegerField(required=False,initial=0)
     # c2ab = forms.IntegerField(required=False,initial='A')
     c3 = forms.CharField(required=False)
-    max_amp3 = forms.IntegerField(required=False,initial=12)
+    max_amp3 = forms.IntegerField(required=False,initial=0)
     # c3ab = forms.IntegerField(required=False,initial='A')
     c4 = forms.CharField(required=False)
-    max_amp4 = forms.IntegerField(required=False,initial=12)
+    max_amp4 = forms.IntegerField(required=False,initial=0)
     # c4ab = forms.IntegerField(required=False,initial='A')
     
     class Meta:
