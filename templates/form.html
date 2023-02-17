@@ -181,15 +181,15 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
                   {% for lockout in lockout_Details %}
-                  <input type="number" id="weekdayFrom1" class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp" title='Value must be between 0 and 23' value="{{ lockout.weekday_from_1 }}">
-                  <div id="weekdayError1" style="display: none; color: red;"></div>
+                  <input type="text" id="weekdayFrom1" class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp"  value="{{ lockout.weekday_from_1 }}">
+                  <span id="weekdayError1" style="display: none; color: red;"></span>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="number" id="weekdayTo1" class="form-control lockout" name="weekday_to_1" value="{{ lockout.weekday_to_1 }}">
-                  <div id="weekdayError2" style="display: none; color: red;"></div>
+                  <input type="text" id="weekdayTo1" class="form-control lockout" name="weekday_to_1"  value="{{ lockout.weekday_to_1 }}">
+                  <span id="weekdayError2" style="display: none; color: red;"></span>
                 </div>
               </div>
             </div>
@@ -197,14 +197,14 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
-                  <input type="number" id="weekdayFrom2" class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}">
+                  <input type="text" id="weekdayFrom2" class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}">
                   <div id="weekdayError3" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="number" id="weekdayTo2" class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}">
+                  <input type="text" id="weekdayTo2" class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}">
                   <div id="weekdayError4" style="display: none; color: red;"></div>
                 </div>
               </div>
@@ -237,7 +237,7 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend To</label>
-                  <input type="number" id="weekendTo2"class="form-control lockout" name="weekend_from_2" value="{{ lockout.weekend_from_2 }}">
+                  <input type="number" id="weekendTo2"class="form-control lockout" name="weekend_to_2" value="{{ lockout.weekend_to_2 }}">
                   <div id="weekendError4" style="display: none; color: red;"></div>
 
                   {% endfor %}
@@ -525,93 +525,148 @@ function validate() {
 }
 
 // ----------------------------------logic for weekdays-----------------------
+// function weekupdate(){
+//   var w3  = document.getElementById('weekdayFrom2').value
+//   var w4= document.getElementById('weekdayTo2').value
+//   console.log("w3, w4",w3,w4);
+//   // return false;
+//   if(w3 != 0 || w4 != 0){
+//   if(int(w3) > int(w4) ){
+//     console.log("condition true")
+//     document.getElementById('weekdayError4').innerHTML = 'From value must be less than To value';
+//     document.getElementById("weekdayError4").style.display = "block";
+//     return false;
+//   }
+
+//   // if(w3<=0 || w3>23){
+//   // document.getElementById('weekdayError3').innerHTML = 'Value must be between 0 and 23';
+//   // document.getElementById("weekdayError3").style.display = "block";
+//   // return false;}
+
+//   // if(w4<=0 || w4>23){
+//   // document.getElementById('weekdayError4').innerHTML = 'Value must be between 0 and 23';
+//   // document.getElementById("weekdayError4").style.display = "block";
+//   // return false;}
+// }
+// }
+
+
 function week(){
-var weekendFrom1 = document.getElementById('weekendFrom1').value 
-var weekendTo1 = document.getElementById('weekendTo1').value
-var weekendFrom2 = document.getElementById('weekendFrom2').value
-var weekendTo2 = document.getElementById('weekendTo2').value
-var weekdayFrom1 = document.getElementById('weekdayFrom1').value 
-var weekdayTo1  = document.getElementById('weekdayTo1').value
-var weekdayFrom2  = document.getElementById('weekdayFrom2').value
-var weekdayTo2= document.getElementById('weekdayTo2').value
+  var w1 = document.getElementById('weekdayFrom1').value 
+var w2  = document.getElementById('weekdayTo1').value
 
-if((weekdayFrom1==0 && weekdayTo1==0) || (weekdayFrom2==0 && weekdayTo2==0) || (weekendFrom1==0 && weekendTo1==0) || (weekendFrom2 == 0 && weekendTo2 == 0)){
-  return true;
-}
-// ----------weekday1------------
+let w3  = document.getElementById('weekdayFrom2').value
+let w4= document.getElementById('weekdayTo2').value
 
+var e1 = document.getElementById('weekendFrom1').value;
+var e2 = document.getElementById('weekendTo1').value
 
+var e3 = document.getElementById('weekendFrom2').value
+var e4 = document.getElementById('weekendTo2').value
 
-if((weekdayFrom1 > weekdayTo1) || (weekdayFrom1 === weekdayTo1)){
-  document.getElementById('weekdayError2').innerHTML = 'From value must be less than To value';
-  document.getElementById("weekdayError2").style.display = "block";
-  return false;}
-  
-if(weekdayFrom1<=0 || weekdayFrom1>23){
+if((w1 == 0 || w2 == 0 || w3 == 0 || w4 == 0 || e1 == 0 || e2 == 0 || e3 == 0 || e4 == 0)){
+
+// ------------------weekday-----------------
+//   ----------------------week 1,2--------------
+  if(!(w1 == 0 && w2 == 0)){
+    console.log('step1');
+    if(w1!=0 || w2!=0){
+      // console.log('step2');
+    if((w1 > w2) || (w1 === w2)){
+      console.log('--------working');
+
+    document.getElementById('weekdayError2').innerHTML = 'From value must be less than To value';
+    document.getElementById("weekdayError2").style.display = "block";
+    return false;}
+
+    if(w1<=0 || w1>23){
+      console.log('w1--------working');
   document.getElementById('weekdayError1').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekdayError1").style.display = "block";
   return false;}
 
-if(weekdayTo1<=0 || weekdayTo1>23){document.getElementById('weekdayError2').innerHTML = 'Value must be between 0 and 23';
+  if(w2<=0 || w2>23){
+    console.log('w2--------working');
+  document.getElementById('weekdayError2').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekdayError2").style.display = "block";
   return false;}
 
+  }
 
 
-  // --------------------weekday2-------------------
-if(weekdayFrom2<=0 || weekdayFrom2>23){document.getElementById('weekdayError3').innerHTML = 'Value must be between 0 and 23';
+
+  // ---------------week 3,4-------------------
+if(w3 != 0 || w4 != 0){
+  if((w3 > w4) || (w3 === w4)){
+    document.getElementById('weekdayError4').innerHTML = 'From value must be less than To value';
+    document.getElementById("weekdayError4").style.display = "block";
+    return false;}
+  else if(w3 < w4){
+    console.log('------here-------')
+    return false;
+  }
+
+  else if(w3<=0 || w3>23){
+  document.getElementById('weekdayError3').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekdayError3").style.display = "block";
   return false;}
 
-if(weekdayTo2<=0 || weekdayTo2>23){document.getElementById('weekdayError4').innerHTML = 'Value must be between 0 and 23';
+  else if(w4<=0 || w4>23){
+  document.getElementById('weekdayError4').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekdayError4").style.display = "block";
   return false;}
+  else{
+    console.log("testing")
+    return false
+  }
 
-// if(weekdayFrom2 === weekdayTo2){
-//   document.getElementById('weekdayError4').innerHTML = 'From value must be less than To value';
-//   document.getElementById("weekdayError4").style.display = "block";
-//   return false;}
+ 
+}
 
-if((weekdayFrom2 > weekdayTo2) || (weekdayFrom2 === weekdayTo2)) {
-  document.getElementById('weekdayError4').innerHTML = 'From value must be less than To value';
-  document.getElementById("weekdayError4").style.display = "block";
-  return false;}
+// -------------------weekend--------------------
+  // -------------weekend 1,2-----------------------
+  if(e1 != 0 || e2 != 0){
+    if((e1 > e2) || (e1 === e2)){
+    document.getElementById('weekendError2').innerHTML = 'From value must be less than To value';
+    document.getElementById("weekendError2").style.display = "block";
+    return false;}
 
-
-// ------------------weekend1------------------
-if(weekendFrom1<=0 || weekendFrom1>23){
+    if(e1<=0 || e1>23){
   document.getElementById('weekendError1').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekendError1").style.display = "block";
-  return false;
-}
-if(weekendTo1<=0 || weekendTo1>23){document.getElementById('weekendError2').innerHTML = 'Value must be between 0 and 23';
+  return false;}
+
+  if(e2<=0 || e2>23){
+  document.getElementById('weekendError2').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekendError2").style.display = "block";
   return false;}
 
-// if(weekendFrom1 > weekendTo1){document.getElementById('weekendError1').innerHTML = 'From value must be less than To value';
-//   document.getElementById("weekendError1").style.display = "block";
-//   return false;}
+}
 
-// ---------------weekend2------------
+if(e3 != 0 || e4 != 0){
+  
+  if((e3 > e4) || (e3 === e4)){
+    document.getElementById('weekendError4').innerHTML = 'From value must be less than To value';
+    document.getElementById("weekendError4").style.display = "block";
+    return false;}
 
-if(weekendFrom2<=0 || weekendFrom2>23){document.getElementById('weekendError3').innerHTML = 'Value must be between 0 and 23';
+    if(e3<=0 || e3>23){
+  document.getElementById('weekendError3').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekendError3").style.display = "block";
   return false;}
 
-if(weekendTo2<=0 || weekendTo2>23){document.getElementById('weekendError4').innerHTML = 'Value must be between 0 and 23';
+  if(e4<=0 || e4>23){
+  document.getElementById('weekendError4').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekendError4").style.display = "block";
   return false;}
 
-if((weekendFrom2 > weekendTo2) || (weekendFrom2 === weekendTo2)){document.getElementById('weekendError4').innerHTML = 'From value must be less than To value';
-  document.getElementById("weekendError4").style.display = "block";
-  return false;}
-
-
-
-
-return true;
 }
 
+}
+return true;
+}
+return true;
+}
 //        
 
 
@@ -727,6 +782,28 @@ function validateForm() {
 
   return isValid;
 }
+
+
+// ----------------------logic to check integer or not----------------
+// // function checkInput(input) {
+//   const inputValue = input.value.trim();
+//   const errorElement = document.getElementById(`${input.id}Error`);
+
+//   if (!errorElement) {
+//     console.error(`Error: Could not find error element with id "${input.id}Error"`);
+//     return;
+//   }
+
+//   if (/^\d+$/.test(inputValue)) {
+//     // If the input contains only integers, clear any error message and hide the error element
+//     errorElement.textContent = '';
+//     errorElement.style.display = 'none';
+//   } else {
+//     // If the input contains non-numeric characters or is not an integer, display an error message and show the error element
+//     errorElement.textContent = 'Error: Input must be an integer';
+//     errorElement.style.display = 'block';
+//   }
+// }
 
 // ---------------------------logic for cab----------------------
 // const field1 = document.querySelector("#circuit_breaker_b");

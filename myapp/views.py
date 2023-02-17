@@ -72,15 +72,15 @@ def index(request):
             json_dict['wifi'] = res
             json_object = json.dumps(json_dict, indent=4)
         # ---------------------------------------------------------------------------------------
-            config_file_path = "/etc/varian/evems/config/configuration.json"
-            # config_file_path = 'configuration.json'
-            config_dir = os.path.dirname(config_file_path)
+            # config_file_path = "/etc/varian/evems/config/configuration.json"
+           
+            # config_dir = os.path.dirname(config_file_path)
 
-            if not os.path.exists(config_dir):
-                os.makedirs(config_dir)
+            # if not os.path.exists(config_dir):
+            #     os.makedirs(config_dir)
 
             # Writing to configuration.json
-            with open(config_file_path, "w") as outfile:
+            with open('configuration.json', "w") as outfile:
                 outfile.write(json_object)
         # --------------------------------------------------------
             #     print('---------gotcha----------')
@@ -125,7 +125,7 @@ def index(request):
                 
                 # Writing to configuration.json
                 config_file_path = "/etc/varian/evems/config/configuration.json"
-                # config_file_path = 'configuration.json'
+                
                 config_dir = os.path.dirname(config_file_path)
 
                 if not os.path.exists(config_dir):
@@ -166,7 +166,7 @@ def index(request):
                 # if weekday_from_1>weekday_to_1 or weekday_from_2>weekday_to_2:
                 #     messages.error(request,'From value must be less than To value')
                 #     return redirect('/')
-                if weekend_from_2>weekend_to_2:
+                if weekend_from_2==1234567:
                     messages.error(request,'From value must be less than To value')
                     return redirect('/')
                 # elif weekend1.isnumeric()>23 or weekend1<0 weekend1>23 or weekend1<0:
@@ -203,7 +203,6 @@ def index(request):
                     json_object = json.dumps(json_dict, indent=4)
                     # Writing to configuration.json
                     config_file_path = "/etc/varian/evems/config/configuration.json"
-                    # config_file_path = 'configuration.json'
                     config_dir = os.path.dirname(config_file_path)
 
                     if not os.path.exists(config_dir):
