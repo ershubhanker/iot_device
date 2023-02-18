@@ -1,21 +1,64 @@
 {
-    "wifi": "",
-    "date_time": "",
+    "wifi": [
+        {
+            "model": "myapp.wifidetails",
+            "pk": 1,
+            "fields": {
+                "ssid": "aniket",
+                "password": "12345678"
+            }
+        }
+    ],
+    "date_time": [
+        {
+            "model": "myapp.datetimedetails",
+            "pk": 1,
+            "fields": {
+                "date": "2023-02-19",
+                "local_time": "04:17:00",
+                "timezone": "-3.5"
+            }
+        }
+    ],
     "lockout": "",
     "Electrical Config": "",
+    "electrical": [
+        {
+            "model": "myapp.ecdetails",
+            "pk": 1,
+            "fields": {
+                "sensed_panel_rating": 120,
+                "sensor_ct_rating": "100",
+                "circuit_breaker_a": "40",
+                "circuit_breaker_b": "0",
+                "c1": "1234567876543245",
+                "max_amp1": 12,
+                "c1_circuit": "A",
+                "c2": "",
+                "max_amp2": 0,
+                "c2_circuit": "A",
+                "c3": "",
+                "max_amp3": 0,
+                "c3_circuit": "A",
+                "c4": "",
+                "max_amp4": 0,
+                "c4_circuit": "A"
+            }
+        }
+    ],
     "tou_hold": [
         {
             "model": "myapp.tou_details",
             "pk": 1,
             "fields": {
-                "weekday_from_1": "12",
-                "weekday_to_1": "18",
+                "weekday_from_1": "20",
+                "weekday_to_1": "22",
                 "weekday_from_2": "15",
-                "weekday_to_2": "9",
-                "weekend_from_1": "0",
-                "weekend_to_1": "0",
-                "weekend_from_2": "0",
-                "weekend_to_2": "0"
+                "weekday_to_2": "16",
+                "weekend_from_1": "15",
+                "weekend_to_1": "19",
+                "weekend_from_2": "12",
+                "weekend_to_2": "15"
             }
         }
     ]

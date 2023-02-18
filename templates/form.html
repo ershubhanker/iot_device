@@ -181,14 +181,14 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
                   {% for lockout in lockout_Details %}
-                  <input type="text" id="weekdayFrom1" class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp"  value="{{ lockout.weekday_from_1 }}">
+                  <input type="number" id="weekdayFrom1" class="form-control lockout" name="weekday_from_1" aria-describedby="emailHelp"  value="{{ lockout.weekday_from_1 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <span id="weekdayError1" style="display: none; color: red;"></span>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="text" id="weekdayTo1" class="form-control lockout" name="weekday_to_1"  value="{{ lockout.weekday_to_1 }}">
+                  <input type="text" id="weekdayTo1" class="form-control lockout" name="weekday_to_1"  value="{{ lockout.weekday_to_1 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <span id="weekdayError2" style="display: none; color: red;"></span>
                 </div>
               </div>
@@ -197,14 +197,14 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
-                  <input type="text" id="weekdayFrom2" class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}">
+                  <input type="text" id="weekdayFrom2" class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekdayError3" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="text" id="weekdayTo2" class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}">
+                  <input type="text" id="weekdayTo2" class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekdayError4" style="display: none; color: red;"></div>
                 </div>
               </div>
@@ -214,14 +214,14 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend From</label>
-                  <input type="number" id="weekendFrom1" class="form-control lockout" name="weekend_from_1"  value="{{ lockout.weekend_from_1 }}">
+                  <input type="number" id="weekendFrom1" class="form-control lockout" name="weekend_from_1"  value="{{ lockout.weekend_from_1 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekendError1" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend To</label>
-                  <input type="number" id="weekendTo1" class="form-control lockout" name="weekend_to_1" value="{{ lockout.weekend_to_1 }}">
+                  <input type="number" id="weekendTo1" class="form-control lockout" name="weekend_to_1" value="{{ lockout.weekend_to_1 }}"  onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekendError2" style="display: none; color: red;"></div>
                 </div>
               </div>
@@ -230,14 +230,14 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend From</label>
-                  <input type="number" id="weekendFrom2" class="form-control lockout" name="weekend_from_2"  value="{{ lockout.weekend_from_2 }}">
+                  <input type="number" id="weekendFrom2" class="form-control lockout" name="weekend_from_2"  value="{{ lockout.weekend_from_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekendError3" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputPassword1">Weekend To</label>
-                  <input type="number" id="weekendTo2"class="form-control lockout" name="weekend_to_2" value="{{ lockout.weekend_to_2 }}">
+                  <input type="number" id="weekendTo2"class="form-control lockout" name="weekend_to_2" value="{{ lockout.weekend_to_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekendError4" style="display: none; color: red;"></div>
 
                   {% endfor %}
@@ -552,28 +552,28 @@ function validate() {
 
 
 function week(){
-  var w1 = document.getElementById('weekdayFrom1').value 
-var w2  = document.getElementById('weekdayTo1').value
+  let w1 = Number(document.getElementById('weekdayFrom1').value);
+let w2  = Number(document.getElementById('weekdayTo1').value);
+let w3  = Number(document.getElementById('weekdayFrom2').value);
+let w4= Number(document.getElementById('weekdayTo2').value);
 
-let w3  = document.getElementById('weekdayFrom2').value
-let w4= document.getElementById('weekdayTo2').value
+let e1 = Number(document.getElementById('weekendFrom1').value);
+let e2 = Number(document.getElementById('weekendTo1').value);
 
-var e1 = document.getElementById('weekendFrom1').value;
-var e2 = document.getElementById('weekendTo1').value
+let e3 = Number(document.getElementById('weekendFrom2').value);
+let e4 = Number(document.getElementById('weekendTo2').value);
 
-var e3 = document.getElementById('weekendFrom2').value
-var e4 = document.getElementById('weekendTo2').value
-
-if((w1 == 0 || w2 == 0 || w3 == 0 || w4 == 0 || e1 == 0 || e2 == 0 || e3 == 0 || e4 == 0)){
+if((w1 == 0 || w2 == 0 || w3 == 0 || w4 == 0 || e1 == 0 || e2 == 0 || e3 == 0 || e4 == 0) || !(w1 == 0 || w2 == 0 || w3 == 0 || w4 == 0 || e1 == 0 || e2 == 0 || e3 == 0 || e4 == 0)){
 
 // ------------------weekday-----------------
 //   ----------------------week 1,2--------------
   if(!(w1 == 0 && w2 == 0)){
-    console.log('step1');
+    // console.log('step1');
     if(w1!=0 || w2!=0){
-      // console.log('step2');
+      // console.log('step2',typeof(w1),typeof(w2));
     if((w1 > w2) || (w1 === w2)){
-      console.log('--------working');
+      console.log('--------working',w1,w2);
+      // return false;
 
     document.getElementById('weekdayError2').innerHTML = 'From value must be less than To value';
     document.getElementById("weekdayError2").style.display = "block";
@@ -597,31 +597,23 @@ if((w1 == 0 || w2 == 0 || w3 == 0 || w4 == 0 || e1 == 0 || e2 == 0 || e3 == 0 ||
 
   // ---------------week 3,4-------------------
 if(w3 != 0 || w4 != 0){
+
+  
+      
   if((w3 > w4) || (w3 === w4)){
     document.getElementById('weekdayError4').innerHTML = 'From value must be less than To value';
     document.getElementById("weekdayError4").style.display = "block";
     return false;}
-  else if(w3 < w4){
-    console.log('------here-------')
-    return false;
-  }
-
-  else if(w3<=0 || w3>23){
+  if(w3<=0 || w3>23){
   document.getElementById('weekdayError3').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekdayError3").style.display = "block";
   return false;}
 
-  else if(w4<=0 || w4>23){
+  if(w4<=0 || w4>23){
   document.getElementById('weekdayError4').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekdayError4").style.display = "block";
   return false;}
-  else{
-    console.log("testing")
-    return false
   }
-
- 
-}
 
 // -------------------weekend--------------------
   // -------------weekend 1,2-----------------------
@@ -636,16 +628,16 @@ if(w3 != 0 || w4 != 0){
   document.getElementById("weekendError1").style.display = "block";
   return false;}
 
-  if(e2<=0 || e2>23){
+    if(e2<=0 || e2>23){
   document.getElementById('weekendError2').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekendError2").style.display = "block";
   return false;}
-
-}
-
-if(e3 != 0 || e4 != 0){
+  }
+  // --------------------weekend 3,4----------------------------
+  if(e3 != 0 || e4 != 0){
   
-  if((e3 > e4) || (e3 === e4)){
+    if((e3 > e4) || (e3 === e4)){
+      console.log("this is e3>e4");
     document.getElementById('weekendError4').innerHTML = 'From value must be less than To value';
     document.getElementById("weekendError4").style.display = "block";
     return false;}
@@ -655,15 +647,13 @@ if(e3 != 0 || e4 != 0){
   document.getElementById("weekendError3").style.display = "block";
   return false;}
 
-  if(e4<=0 || e4>23){
+    if(e4<=0 || e4>23){
   document.getElementById('weekendError4').innerHTML = 'Value must be between 0 and 23';
   document.getElementById("weekendError4").style.display = "block";
   return false;}
+  }
 
 }
-
-}
-return true;
 }
 return true;
 }
@@ -825,6 +815,30 @@ function validateForm() {
 //     errorMessage.style.display = "none";
 //     }
 // });
+// function validateInput() {
+//   // Get the input element and its value
+//   var input = document.getElementById("weekendFrom1");
+//   var value = input.value;
+
+//         function isFloat(str) {
+//   return !isNaN(parseFloat(str)) && parseFloat(str) % 1 !== 0;}
+        
+//   // Check if the value is a number (including floating point numbers)
+//   if (isFloat(value) == false) {
+//     document.getElementById("weekendError1").style.display = "block";
+//   } 
+//   // Check if the value is a non-empty string
+//   else if (value.trim() !== '') {
+//     document.getElementById("weekendError1").innerHTML = "Please enter a valid number.";
+//     document.getElementById("weekendError1").style.display = "block";
+//   } 
+//   // Handle empty input
+//   else {
+//     console.log("ys");
+//   document.getElementById("weekendError1").style.display = "none";
+//   }
+// }
+
 </script>
 
 </body>

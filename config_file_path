@@ -1,0 +1,25 @@
+{
+    "wifi": [
+        {
+            "model": "myapp.wifidetails",
+            "pk": 1,
+            "fields": {
+                "ssid": "aniket",
+                "password": "12345678"
+            }
+        }
+    ],
+    "date_time": [
+        {
+            "model": "myapp.datetimedetails",
+            "pk": 1,
+            "fields": {
+                "date": "2023-02-19",
+                "local_time": "04:17:00",
+                "timezone": "-3.5"
+            }
+        }
+    ],
+    "lockout": "",
+    "Electrical Config": ""
+}
