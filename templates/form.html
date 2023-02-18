@@ -188,7 +188,7 @@
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="text" id="weekdayTo1" class="form-control lockout" name="weekday_to_1"  value="{{ lockout.weekday_to_1 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+                  <input type="number" id="weekdayTo1" class="form-control lockout" name="weekday_to_1"  value="{{ lockout.weekday_to_1 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <span id="weekdayError2" style="display: none; color: red;"></span>
                 </div>
               </div>
@@ -197,14 +197,14 @@
               <div class="col">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Weekday From</label>
-                  <input type="text" id="weekdayFrom2" class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+                  <input type="number" id="weekdayFrom2" class="form-control lockout" name="weekday_from_2" value="{{ lockout.weekday_from_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekdayError3" style="display: none; color: red;"></div>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">  
                   <label for="exampleInputPassword1">Weekday To</label>
-                  <input type="text" id="weekdayTo2" class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
+                  <input type="number" id="weekdayTo2" class="form-control lockout" name="weekday_to_2" value="{{ lockout.weekday_to_2 }}" onkeydown="if(event.key==='.'){event.preventDefault();}"  oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');">
                   <div id="weekdayError4" style="display: none; color: red;"></div>
                 </div>
               </div>
